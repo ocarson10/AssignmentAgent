@@ -10,18 +10,18 @@ The data we need for our app to work is class and assignment information. Basica
 Our app will be implemented as a PWA. The mobile-first design of PWAs will be beneficial to students (who almost always have their phones available to them) so that they will be able to quickly and easily enter new assignments into the app, perhaps while the professor is reviewing due dates at the end of the lecture. In order to enter a new assignment in the app, the user won’t have to pull out their clunky laptop or risk forgetting about the assignment on their trip home where they can enter the assignment on their desktop. The offline functionality of PWAs will allow our app to send emails and push notifications to users even when the app is not active. The ability to send push notifications is another benefit to creating our app as a PWA. 
 
 ## Wireframes
-[Desktop - Login](/Wireframes/Desktop%20-%20Login.jpg)
-[Desktop - All Classes](/Wireframes/Desktop%20-%20All%20Classes.jpg)
-[Desktop - Single Class](/Wireframes/Desktop%20-%20Single%20Class.jpg)
-[Desktop - Edit Assignment](/Wireframes/Desktop%20-%20Edit%20Assignment.jpg)
-[Desktop - GPA](/Wireframes/Desktop%20-%20GPA.jpg)
-[Desktop - Calendar](/Wireframes/Desktop%20-%20Calendar.jpg)
-[Mobile - Login](/Wireframes/Mobile%20-%20Login.jpg)
-[Mobile - All Classes](/Wireframes/Mobile%20-%20All%20Classes.jpg)
-[Mobile - Single Class](/Wireframes/Mobile%20-%20Single%20Class.jpg)
-[Mobile - Edit Assignment](/Wireframes/Mobile%20-%20Edit%20Assignment.jpg)
-[Mobile - GPA](/Wireframes/Mobile%20-%20GPA.jpg)
-[Mobile - Calendar](/Wireframes/Mobile%20-%20Calendar.jpg)
+![Desktop - Login](/Proposal/Wireframes/Desktop%20-%20Login.jpg)
+![Desktop - All Classes](/Proposal/Wireframes/Desktop%20-%20All%20Classes.jpg)
+![Desktop - Single Class](/Proposal/Wireframes/Desktop%20-%20Single%20Class.jpg)
+![Desktop - Edit Assignment](/Proposal/Wireframes/Desktop%20-%20Edit%20Assignment.jpg)
+![Desktop - GPA](/Proposal/Wireframes/Desktop%20-%20GPA.jpg)
+![Desktop - Calendar](/Proposal/Wireframes/Desktop%20-%20Calendar.jpg)
+![Mobile - Login](/Proposal/Wireframes/Mobile%20-%20Login.jpg)
+![Mobile - All Classes](/Proposal/Wireframes/Mobile%20-%20All%20Classes.jpg)
+![Mobile - Single Class](/Proposal/Wireframes/Mobile%20-%20Single%20Class.jpg)
+![Mobile - Edit Assignment](/Proposal/Wireframes/Mobile%20-%20Edit%20Assignment.jpg)
+![Mobile - GPA](/Proposal/Wireframes/Mobile%20-%20GPA.jpg)
+![Mobile - Calendar](/Proposal/Wireframes/Mobile%20-%20Calendar.jpg)
 
 
 ## Contributions
