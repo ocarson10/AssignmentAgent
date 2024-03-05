@@ -1,11 +1,15 @@
-const express = require('express');
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Tracker from './static/Tracker';
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/tracker" element={<Tracker />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
 
-const app = express();
-const PORT = process.env.PORT;
-
-// Designate the static folder as serving static resources
-app.use(express.static(__dirname + '/static'));
-
-
-// As our server to listen for incoming connections
-app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
+export default App;
