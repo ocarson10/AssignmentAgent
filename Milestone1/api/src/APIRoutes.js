@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const {assignments, classes} = require('./data');
+const {assignments, classes, users} = require('./data');
 
 // router.get("/api", (req, res) => {
 //     res.json({ message: "Hello from server!" });
@@ -39,4 +39,18 @@ router.get('/assignments/class/:classCode', (req,res) => {
     const results = Object.values(assignments).filter(assignment => assignment.classCode.includes(classCode));
     res.json(results);
 })
+
+router.get('/users', (req,res) => {
+    res.json(Object.values(users));
+});
+
+router.get('/users/:userId', (req, res) =>{
+    const user = users[req.params.userId];
+    if(user){
+        res.json(user);
+    } else {
+        res.status(404).json({error: "User not found"});
+    }
+});
+
 module.exports = router;

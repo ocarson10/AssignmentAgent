@@ -65,3 +65,20 @@ module.exports.classes = {
     "CreditHours": "3.0",
   },    
 };
+module.exports.users = {
+  "1":{
+    "id": "1",
+    "username": "abheywar",
+    "password": "Password1",
+  },
+  "2":{
+    "id": "2",
+    "username": "ffguevar",
+    "password": "Password2",
+  },
+  "3":{
+    "id": "3",
+    "username": "orcarson",
+    "password": "Password3",
+  },
+};

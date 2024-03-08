@@ -71,10 +71,36 @@ function handleError(error) {
       })
       .catch(handleError);
   };
+
+  const getUsers = () => {
+    return fetch(API_BASE + '/users')
+      .then(checkResponse)
+      .then(res => {
+        return res.json();
+      })
+      .then(users => {
+        return users;
+      })
+      .catch(handleError);
+  };
+  
+  const getUserById = (id) => {
+    return fetch(API_BASE + `/users/${id}`)
+      .then(checkResponse)
+      .then(res => {
+        return res.json();
+      })
+      .then(user => {
+        return user;
+      })
+      .catch(handleError);
+  };
   module.exports = {
     getAssignments,
     getAssignmentById,
     getAssignmentsByClassCode,
     getClasses,
-    getClassById
+    getClassById,
+    getUsers,
+    getUserById
   };
