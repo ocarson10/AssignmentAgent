@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import "./css/login.css";
 import Image from "./images/assignment-agent-logo.png"
 
+// Used this tutorial for guidance: https://clerk.com/blog/building-a-react-login-page-template
+
 const Login = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
