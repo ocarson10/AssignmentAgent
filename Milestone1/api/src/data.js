@@ -51,18 +51,36 @@ module.exports.classes = {
     "classCode": "CH 101",
     "Grade": "",
     "CreditHours": "3.0",
+    "GradingPercentage": [
+      "25% Homework",
+      "25% Exams",
+      "40% Labs",
+      "10% Participation",
+    ],
   },
   "2":{
     "id": "2",
     "classCode": "CSC 116",
     "Grade": "",
     "CreditHours": "3.0",
+    "GradingPercentage": [
+      "30% Homework",
+      "20% Labs",
+      "20% Exams",
+      "10% Participation"
+    ],
   },
   "3":{
     "id": "3",
     "classCode": "MA 141",
     "Grade": "",
     "CreditHours": "3.0",
+    "GradingPercentage": [
+      "25% Homework",
+      "40% Exams",
+      "25% Quizzes",
+      "10% Participation"
+    ],
   },    
 };
 module.exports.users = {
