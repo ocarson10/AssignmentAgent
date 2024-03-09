@@ -40,9 +40,9 @@
 
 #### [Mico Guevarra]
 
-- Contribution 1
-- Contribution 2
-- ...
+- Class List Wireframe
+- Class List Frontend with Add Class popup
+
 
 #### Milestone Effort Contribution
 
