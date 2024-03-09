@@ -60,7 +60,7 @@ const Login = (props) => {
             </div>
             <br />
             <div className={'inputContainer'}>
-                <button onClick={onButtonClick}>Login</button>
+                <button id="login-btn" onClick={onButtonClick}>Login</button>
             </div>
             <div>
                 <small>Need an account? <a>SIGN UP</a></small>

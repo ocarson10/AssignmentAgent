@@ -69,7 +69,7 @@ label {
     margin-right: 3%;
 }
 
-button {
+#login-btn {
     background-color: #8878C3;
     border: none;
     color: white;
