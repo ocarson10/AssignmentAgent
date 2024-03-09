@@ -28,9 +28,9 @@
 
 #### [Olivia Carson]
 
-- Contribution 1
-- Contribution 2
-- ...
+- Assignment Tracker Frontend with GPA popup and Add/Edit Assignment Funtionality
+- Asssignment Tracker Routes and mock data
+- Set up of basic React Application
 
 #### [Austin Heyward]
 
