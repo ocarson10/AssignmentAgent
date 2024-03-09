@@ -4,11 +4,11 @@
 
 | Pages              | Status | Wireframe |
 |--------------------|--------|-----------|
-| Login              | 70%    | wireframe |
-| Assignment Tracker | 70%    | wireframe |
-| GPA Popup          | 70%    | wireframe |
-| Class List         | 70%    | wireframe |
-| Calendar           | 0%     | wireframe |
+| Login              | 70%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20Login.jpg) |
+| Assignment Tracker | 70%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20All%20Classes.jpg) |
+| GPA Popup          | 70%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20GPA.jpg)|
+| Class List         | 70%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20Add%20Classes.png) |
+| Calendar           | 0%     | [wireframe](../Proposal/Wireframes/Desktop%20-%20Calendar.jpg)|
 
 | Method | Route                         | Description                                    |
 |--------|-------------------------------|------------------------------------------------|
@@ -34,6 +34,7 @@
 
 #### [Austin Heyward]
 
+- Attended office hours to sort out a VM issue
 - Login Frontend
 - Login API Routes
 - README
