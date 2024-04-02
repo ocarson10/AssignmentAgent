@@ -33,7 +33,7 @@ function AssignmentForm(props) {
                     Class Code 
                     <select name="classes" id="classes" value={selected} onChange={handleSelectChange}>
                         {props.allClasses.map(singleClass => (
-                            <option value={singleClass.classCode}>{singleClass.classCode}</option>
+                            <option value={singleClass.name}>{singleClass.name}</option>
                         ))}
                 </select>
                 </label>

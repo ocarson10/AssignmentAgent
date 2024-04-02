@@ -19,6 +19,7 @@ import Image from "./images/assignment-agent-logo.png"
 function ClassList() {
     const[allClasses, setAllClasses] = React.useState([]);
     const[classModal, setClassModal] = React.useState(false);
+    const[allAssignmentTypes, setAllAssignmentTypes] = React.useState([]);
     const[checkedItem] = React.useState(null);
 
 
@@ -34,6 +35,15 @@ function ClassList() {
         fetchClasses();
     }, []);
 
+    React.useEffect(() => {
+        const fetchAssignmentTypes = async () => {
+            const types = await api.getAssignmentTypes();
+            setAllAssignmentTypes(types);
+        };
+        fetchAssignmentTypes();
+    }, []);
+
+   
     return (
         <div id="classlist-page">
             {/* Navigation Bar from Olivia's Tracker Page */}
@@ -68,13 +78,17 @@ function ClassList() {
                     {/* Reference: https://react-bootstrap.netlify.app/docs/components/cards/ */}
                     {allClasses.map(singleClass =>(
                         <Card>
-                            <Card.Header>{singleClass.classCode}</Card.Header>
+                            <Card.Header>{singleClass.name}</Card.Header>
                             <Card.Body>
-                                <Card.Title>Credit Hours: {singleClass.CreditHours}</Card.Title>
+                                <Card.Title>Credit Hours: {singleClass.creditHours}</Card.Title>
                                 <Card.Text>
                                 <ul>
-                                    {singleClass.GradingPercentage.map((percentage) => (
-                                        <li>{percentage}</li>
+                                    {allAssignmentTypes
+                                        .filter((type) => type.className === singleClass.name)
+                                        .map((filteredType, index) => (
+                                            <li key={index}>
+                                            {filteredType.name}: {filteredType.percentage}%
+                                            </li>
                                     ))}
                                 </ul>
                                 </Card.Text>

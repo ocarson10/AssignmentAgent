@@ -71,7 +71,29 @@ function handleError(error) {
       })
       .catch(handleError);
   };
+  const getAssignmentTypeByClass = (classCode) => {
+    return fetch(API_BASE + `/classes/${classCode}/assignment-types`)
+      .then(checkResponse)
+      .then(res => {
+        return res.json();
+      })
+      .then(types => {
+        return types;
+      })
+      .catch(handleError);
+  };
 
+  const getAssignmentTypes = () => {
+    return fetch(API_BASE + '/assignment-types')
+      .then(checkResponse)
+      .then(res => {
+        return res.json();
+      })
+      .then(types => {
+        return types;
+      })
+      .catch(handleError);
+  }
   const getUsers = () => {
     return fetch(API_BASE + '/users')
       .then(checkResponse)
@@ -101,6 +123,8 @@ function handleError(error) {
     getAssignmentsByClassCode,
     getClasses,
     getClassById,
+    getAssignmentTypeByClass,
+    getAssignmentTypes,
     getUsers,
     getUserById
   };

@@ -93,7 +93,7 @@ function Tracker() {
                         <select name="classes" id="classes" value={selected} onChange={handleSelectChange}>
                             <option value="All Classes">All Classes</option>
                             {allClasses.map(singleClass => (
-                                <option value={singleClass.classCode}>{singleClass.classCode}</option>
+                                <option value={singleClass.name}>{singleClass.name}</option>
                             ))}
                         </select>
                     </div>
@@ -116,10 +116,10 @@ function Tracker() {
                         </thead>
                         <tbody>
                             {allClasses.map(singleClass =>(
-                                <tr key={singleClass.id}>
-                                    <td>{singleClass.classCode}</td>
-                                    <td>{singleClass.Grade}</td>
-                                    <td>{singleClass.CreditHours}</td>
+                                <tr key={singleClass.name}>
+                                    <td>{singleClass.name}</td>
+                                    <td>Grade PlaceHolder</td>
+                                    <td>{singleClass.creditHours.toString()}</td>
                                 </tr>
                             ))}
 
@@ -148,11 +148,11 @@ function Tracker() {
                                     {/* TODO: Make function that makes "Edit Assignment" and "Delete Assignment buttons appear when assignment is selected" */}
                                     <td><input type="checkbox" name="selectedAssignment" value={assignment.id} checked={assignment.id === checkedItem} onChange={() => handleCheckboxChange(assignment.id)}/></td>
                                     <td>{assignment.classCode}</td>
-                                    <td>{assignment.Name}</td>
-                                    <td>{assignment.Type}</td>
-                                    <td>{assignment.DueDate}</td>
-                                    <td>{assignment.Grade}</td>
-                                    <td>{assignment.Status}</td>
+                                    <td>{assignment.name}</td>
+                                    <td>{assignment.type}</td>
+                                    <td>{assignment.dueDate}</td>
+                                    <td>{assignment.grade}</td>
+                                    <td>{assignment.status}</td>
                                 </tr>
                             ))}
 

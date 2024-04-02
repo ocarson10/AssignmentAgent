@@ -9,53 +9,55 @@
 
 
 CREATE TABLE IF NOT EXISTS `class` (
-  `clss_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `clss_name` varchar(100) NOT NULL,
-  PRIMARY KEY (`clss_id`)
+  `credit_hours` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`clss_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DELETE FROM `class`;
-INSERT INTO `class` (`clss_id`, `clss_name`) VALUES
-	(1, 'CH 101'),
-	(2, 'CSC 116'),
-	(3, 'MA 141');
+INSERT INTO `class` (`clss_name`, `credit_hours`) VALUES
+	('CH 101', 4),
+	('CSC 116', 3),
+	('MA 141', 3);
+
+CREATE TABLE IF NOT EXISTS `assignment_type` (
+  `type_name` varchar(100) NOT NULL,
+  `class_name` varchar(100) NOT NULL,
+  `percentage`  int(10) unsigned NOT NULL,
+  PRIMARY KEY (`type_name`, `class_name`),
+  INDEX `class_name_index` (`class_name`), 
+  FOREIGN KEY (`class_name`) REFERENCES `class`(`clss_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DELETE FROM `assignment_type`;
+INSERT INTO `assignment_type` (`type_name`, `class_name`, `percentage`) VALUES
+	('Homework', 'CH 101', 20),
+	('Lab', 'CSC 116', 35),
+	('Homework', 'MA 141', 20),
+  ('Exam', 'MA 141', 50);
 
 CREATE TABLE IF NOT EXISTS `assignment` (
   `asm_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `class_name`  varchar(100) NOT NULL,
   `asm_name` varchar(100) NOT NULL ,
   `asm_type` varchar(100) NOT NULL,
   `asm_due` datetime NOT NULL,
   `asm_grade` varchar(10) DEFAULT NULL,
   `asm_status` varchar(50) NOT NULL,
-  PRIMARY KEY (`asm_id`) USING BTREE
+  PRIMARY KEY (`asm_id`),
+  FOREIGN KEY (`class_name`) REFERENCES `class`(`clss_name`),
+  FOREIGN KEY (`asm_type`) REFERENCES `assignment_type`(`type_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DELETE FROM `assignment`;
-INSERT INTO `assignment` (`asm_id`, `asm_name`, `asm_type`, `asm_due`, `asm_grade`, `asm_status`) VALUES
-	(1, 'Webassign Ch. 1', 'Homework', '2024-01-24 23:59:00', '23/25', 'Completed'),
-	(2, 'Week 1 Lab', 'Lab', '2024-01-16 10:45:00', '95/100', 'Completed'),
-	(3, 'Homework 1', 'Homework', '2024-01-16 23:59:00', '22/30', 'Completed'),
-	(4, 'Week 2 Lab', 'Lab', '2024-01-23 10:45:00', NULL, 'In Progress'),
-	(5, 'Test 1', 'Exam', '2024-02-01 15:00:00', NULL, 'Not Started');
+INSERT INTO `assignment` (`asm_id`, `class_name`, `asm_name`, `asm_type`, `asm_due`, `asm_grade`, `asm_status`) VALUES
+	(1, 'CH 101', 'Webassign Ch. 1', 'Homework', '2024-01-24 23:59:00', '23/25', 'Completed'),
+	(2, 'CSC 116', 'Week 1 Lab', 'Lab', '2024-01-16 10:45:00', '95/100', 'Completed'),
+	(3, 'MA 141', 'Homework 1', 'Homework', '2024-01-16 23:59:00', '22/30', 'Completed'),
+	(4, 'CSC 116', 'Week 2 Lab', 'Lab', '2024-01-23 10:45:00', NULL, 'In Progress'),
+	(5, 'MA 141', 'Test 1', 'Exam', '2024-02-01 15:00:00', NULL, 'Not Started');
 
 
-
-CREATE TABLE IF NOT EXISTS `assignment_class` (
-  `acl_asm_id` int(10) unsigned NOT NULL,
-  `acl_clss_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`acl_asm_id`,`acl_clss_id`),
-  KEY `FK_ACL_CLSS` (`acl_clss_id`),
-  CONSTRAINT `FK_ACL_CLSS` FOREIGN KEY (`acl_clss_id`) REFERENCES `class` (`clss_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_ACL_ASM` FOREIGN KEY (`acl_asm_id`) REFERENCES `assignment` (`asm_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-DELETE FROM `assignment_class`;
-INSERT INTO `assignment_class` (`acl_asm_id`,`acl_clss_id`) VALUES
-	(1,1),
-	(2,2),
-	(3,3),
-	(4,2),
-	(5,3);
 
 CREATE TABLE IF NOT EXISTS `user` (
   `usr_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
