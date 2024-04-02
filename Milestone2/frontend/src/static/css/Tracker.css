@@ -1,0 +1,86 @@
+/* 
+tbody tr:nth-child(even){
+    background-color: #E3E3E3;
+} */
+
+/* td,th {
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+} */
+
+#tracker-elements{
+    margin: 2%;
+}
+#tracker-elements h2{
+    margin-bottom: 80px;
+
+}
+button{
+    background-color: #8878C3;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    margin: 5px;
+    font-size: x-large;
+}
+
+#table-btns{
+    display: flex;
+    justify-content: space-between;
+}
+
+#top-btns {
+    margin-left: auto;
+}
+img {
+    width: 300px;
+    height: auto;
+}
+#tracker-page{
+    max-width: 100%;
+}
+/* Possible future addition: make table set height and have scrollbar */
+table{
+    max-width: 100%;
+}
+/* all screens with width less than max-width */
+@media all and (max-width: 575px){
+    table{
+        font-size: x-small;
+    }
+    
+}
+@media all and (max-width: 385px){
+    table{
+        font-size: xx-small;
+    }
+    button{
+        font-size: large;
+    }
+}
+
+@media all and (max-width: 350px){
+    img{
+        width: 260px;
+    }
+    table{
+        font-size: 7px;
+    }
+    button{
+        font-size: medium;
+    }
+    
+}
+@media all and (max-width: 300px){
+    img{
+        width: 260px;
+    }
+    table{
+        font-size: 5.5px;
+    }
+    button{
+        font-size: medium;
+    }
+    
+}

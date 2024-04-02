@@ -1,0 +1,83 @@
+.mainContainer {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* .titleContainer {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    height: auto;
+} */
+
+#logo {
+    width: 50%;
+    height: auto;
+}
+
+.loginBox {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e4e4e4;
+    border: none;
+    border-radius: 10px;
+    margin: 5px;
+    width: 30%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.loginHeader {
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.inputContainer {
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+label {
+    padding-bottom: 2%;
+}
+
+#userField {
+    width: 100%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#passField {
+    width: 100%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#login-btn {
+    background-color: #8878C3;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: large;
+    width: 100%;
+}
+
+small {
+    color: #8f8f8f;
+}
