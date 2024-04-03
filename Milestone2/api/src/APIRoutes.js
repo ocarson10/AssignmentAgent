@@ -5,8 +5,7 @@ const {assignments, classes, users} = require('./data');
 const ClassDAO = require('./db/ClassDAO')
 const AssignmentDAO = require('./db/AssignmentDAO');
 const AssignmentTypeDAO = require('./db/AssignmentTypeDAO');
-// will implement once token authentication is added
-// const UserDAO = require('./db/UserDAO');
+const UserDAO = require('./db/UserDAO');
 
 // router.get("/api", (req, res) => {
 //     res.json({ message: "Hello from server!" });
