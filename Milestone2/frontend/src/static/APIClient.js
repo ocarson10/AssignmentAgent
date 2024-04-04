@@ -1,3 +1,4 @@
+import HTTPClient from "./HTTPClient.js";
 
 const API_BASE = '/api';
 function checkResponse(res) {
@@ -117,7 +118,20 @@ function handleError(error) {
       })
       .catch(handleError);
   };
-  module.exports = {
+
+  const logIn = (username, password) => {
+    const data = {
+      username: username,
+      password: password
+    }
+    return HTTPClient.post(`${API_BASE}/users/login`, data);
+  };
+
+  const logOut = () => {
+    return HTTPClient.post(`${API_BASE}/users/logout`, {});
+  };
+  
+  export default {
     getAssignments,
     getAssignmentById,
     getAssignmentsByClassCode,
@@ -126,5 +140,7 @@ function handleError(error) {
     getAssignmentTypeByClass,
     getAssignmentTypes,
     getUsers,
-    getUserById
+    getUserById,
+    logIn,
+    logOut
   };

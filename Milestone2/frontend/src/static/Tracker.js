@@ -43,6 +43,14 @@ function Tracker() {
         setAssignmentModal(true);
     }
 
+    const onSignOutClick = () => {
+        api.logOut().then(() => {
+          document.location = "./";
+        }).catch((err) => {
+          console.log("ERROR");
+        });
+    }
+
 
     React.useEffect(() => {
         const fetchAssignments = async () => {
@@ -77,7 +85,7 @@ function Tracker() {
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Sign Out</Nav.Link>
+                        <Nav.Link onClick={onSignOutClick}>Sign Out</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
                 </Container>

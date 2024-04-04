@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const {assignments, classes, users} = require('./data');
+const {TokenMiddleware, generateToken, removeToken} = require('./middleware/TokenMiddleware');
 
 const ClassDAO = require('./db/ClassDAO')
 const AssignmentDAO = require('./db/AssignmentDAO');
@@ -86,8 +86,7 @@ router.get('/assignment-types', (req,res) => {
     .catch(err => {
         res.status(400).json({error: err});
     })
-})
-
+});
 
 router.get('/users', (req,res) => {
     res.json(Object.values(users));
@@ -100,6 +99,31 @@ router.get('/users/:userId', (req, res) =>{
     } else {
         res.status(404).json({error: "User not found"});
     }
+});
+
+router.post('/users/login', (req,  res) => {
+    if(req.body.username && req.body.password) {
+      UserDAO.getUserByCredentials(req.body.username, req.body.password).then(user => {
+        let result = {
+          user: user
+        }
+  
+        generateToken(req, res, user);
+  
+        res.json(result);
+      }).catch(err => {
+        res.status(400).json({error: err});
+      });
+    }
+    else {
+      res.status(401).json({error: 'Not authenticated'});
+    }
+});
+
+router.post('/users/logout', (req,  res) => {
+    removeToken(req, res);
+  
+    res.json({success: true});
 });
 
 module.exports = router;

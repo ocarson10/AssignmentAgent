@@ -13,6 +13,13 @@ function getUserByCredentials(username, password) {
   });
 }
 
+function createUser(user) {
+  return db.query('INSERT INTO user (`usr_first_name`, `usr_last_name`, `usr_username`, `usr_password`) VALUES (?, ?, ?, ?)',
+    [user.first_name, user.last_name, user.username, user.password]).then(({results}) => {
+
+    });
+}
+
 
 module.exports = {
   getUserByCredentials: getUserByCredentials,
