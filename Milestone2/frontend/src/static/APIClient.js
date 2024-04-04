@@ -12,7 +12,10 @@ function handleError(error) {
     console.log("ERROR", error);
     throw error;
   }
-
+  
+  const getCurrentUser = () => {
+    return HTTPClient.get(`${API_BASE}/users/current`);
+  };
   const getAssignments = () => {
     return fetch(API_BASE + '/assignments')
       .then(checkResponse)
@@ -130,8 +133,19 @@ function handleError(error) {
   const logOut = () => {
     return HTTPClient.post(`${API_BASE}/users/logout`, {});
   };
+  const createUser = (first_name, last_name, username, password) => {
+    
+    const data = {
+      first_name: first_name,
+      last_name: last_name,
+      username: username,
+      password: password
+    }
+    return HTTPClient.post(`${API_BASE}/users`, data);
+  }
   
   export default {
+    getCurrentUser,
     getAssignments,
     getAssignmentById,
     getAssignmentsByClassCode,
@@ -142,5 +156,6 @@ function handleError(error) {
     getUsers,
     getUserById,
     logIn,
-    logOut
+    logOut,
+    createUser
   };

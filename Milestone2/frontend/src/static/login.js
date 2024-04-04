@@ -31,7 +31,13 @@ const Login = (props) => {
   const onSignUpClick = () => {
     setButtonPopup(true);
   }
-
+  const onCreateClick = () => {
+    api.createUser(newFirstName, newLastName,newUsername,newPassword).then(userData => {
+      document.location = "./";
+    }).catch((err) => {
+      console.log("ERROR");
+    });
+  }
   return (
     <div className={'mainContainer'}>
         <img id="logo" src={Image} alt="AssignmentAgent Logo"/>
@@ -106,7 +112,7 @@ const Login = (props) => {
               {/* <label className="errorLabel">{passwordError}</label> */}
           </div>
           <div className={'inputContainer'}>
-              <button id="submit-btn" onClick={onButtonClick}>Create Account</button>
+              <button id="submit-btn" onClick={onCreateClick}>Create Account</button>
           </div>
         </SignUpPopup>
 

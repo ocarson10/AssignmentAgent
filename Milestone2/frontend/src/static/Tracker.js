@@ -19,6 +19,21 @@ function Tracker() {
     const[assignmentModal, setAssignmentModal] = React.useState(false);
     const[checkedItem, setCheckedItem] = React.useState(null);
     const[isEdit, setIsEdit]= React.useState(false);
+    const [user, setUser] = React.useState(null);
+
+    React.useEffect(() => {
+        api.getCurrentUser()
+          .then(user => {
+            setUser(user);
+          })
+          .catch(error => {
+            if (error.status === 401) {
+              window.location = './';
+            } else {
+              console.log(`${error.status}`, error);
+            }
+          });
+      }, []);
 
     const handleCheckboxChange = (id) => {
         
@@ -58,14 +73,14 @@ function Tracker() {
             setAllAssignments(assignments);
         };
         fetchAssignments();
-    }, []);
+    }, [user]);
     React.useEffect(() => {
         const fetchClasses = async () => {
             const classes = await api.getClasses();
             setAllClasses(classes);
         };
         fetchClasses();
-    }, []);
+    }, [user]);
 
     const classFilter = () => {
        

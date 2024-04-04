@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const cookieParser = require('cookie-parser');
+router.use(cookieParser());
 
 const {TokenMiddleware, generateToken, removeToken} = require('./middleware/TokenMiddleware');
 
@@ -12,7 +14,7 @@ const UserDAO = require('./db/UserDAO');
 //   });
 
 //get all assignments
-router.get('/assignments', (req,res) => {
+router.get('/assignments', TokenMiddleware, (req,res) => {
     AssignmentDAO.getAssignments().then(assignments => {
         res.json(assignments);
     })
@@ -22,7 +24,7 @@ router.get('/assignments', (req,res) => {
     
 });
 //get specific assignment
-router.get('/assignments/:assignmentId', (req, res) =>{
+router.get('/assignments/:assignmentId', TokenMiddleware,(req, res) =>{
     const assignmentId = req.params.assignmentId;
     AssignmentDAO.getAssignmentById(assignmentId).then(assignment => {
         if(assignment){
@@ -38,7 +40,7 @@ router.get('/assignments/:assignmentId', (req, res) =>{
 
 
 //get all classes
-router.get('/classes', (req,res) => {
+router.get('/classes', TokenMiddleware,(req,res) => {
     ClassDAO.getClasses().then(classes => {
         res.json(classes);
     })
@@ -47,7 +49,7 @@ router.get('/classes', (req,res) => {
       });
 });
 
-router.get('/classes/:classCode', (req, res) =>{
+router.get('/classes/:classCode', TokenMiddleware, (req, res) =>{
     const classCode = req.params.classCode;
     ClassDAO.getClassByCode(classCode).then(classData => {
         if(classData){
@@ -62,7 +64,7 @@ router.get('/classes/:classCode', (req, res) =>{
       });
 });
 
-router.get('/classes/:classCode/assignment-types', (req, res) => {
+router.get('/classes/:classCode/assignment-types', TokenMiddleware, (req, res) => {
         const classCode = req.params.classCodes;
         AssignmentTypeDAO.getAssignmentTypeByClass(classCode).then(types =>{
             res.json(types);
@@ -71,7 +73,7 @@ router.get('/classes/:classCode/assignment-types', (req, res) => {
             res.status(400).json({error: err});
           });
 })
-router.get('/assignments/class/:classCode', (req,res) => {
+router.get('/assignments/class/:classCode', TokenMiddleware, (req,res) => {
     classCode = req.params.classCode;
     //TODO: make sure class exists before filtering once class data is created
     AssignmentDAO.getAssignmentByClass(classCode).then(assignments => {
@@ -79,7 +81,7 @@ router.get('/assignments/class/:classCode', (req,res) => {
     });
 });
 
-router.get('/assignment-types', (req,res) => {
+router.get('/assignment-types', TokenMiddleware, (req,res) => {
     AssignmentTypeDAO.getAssignmentTypes().then(types => {
         res.json(types);
     })
@@ -88,11 +90,16 @@ router.get('/assignment-types', (req,res) => {
     })
 });
 
-router.get('/users', (req,res) => {
+router.get('/users', TokenMiddleware, (req,res) => {
     res.json(Object.values(users));
 });
-
-router.get('/users/:userId', (req, res) =>{
+router.post('/users', (req, res) => {
+    let user = req.body;
+    UserDAO.createUser(user).then(newUser => {
+        res.json(newUser);
+    });
+});
+router.get('/users/:userId', TokenMiddleware, (req, res) =>{
     const user = users[req.params.userId];
     if(user){
         res.json(user);
@@ -125,5 +132,11 @@ router.post('/users/logout', (req,  res) => {
   
     res.json({success: true});
 });
+
+router.get('/users/current', TokenMiddleware, (req,  res) => {
+    console.log("CURRENT USER:",req.user);
+    res.json(req.user);
+
+  });
 
 module.exports = router;
