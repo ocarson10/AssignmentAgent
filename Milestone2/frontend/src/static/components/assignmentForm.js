@@ -1,4 +1,5 @@
 import React from "react";
+import api from "../APIClient.js";
 
 // When I get Back: Move this over to tracker.js to prevent fetch errors
 function AssignmentForm(props) {
@@ -14,7 +15,13 @@ function AssignmentForm(props) {
     };
     const handleSubmit = (e) => {
         // should eventually post assignment to db
-        window.location.reload();
+        api.addAssignment(selected.value, name.value, type.value, date.value, grade.value, status.value).then(userData => {
+            document.location = "./";
+            console.log("PASS");
+        }).catch((err) => {
+            console.log("ERROR addAssignment");
+            console.log(err);
+        })
     }
    
     return (
@@ -56,7 +63,7 @@ function AssignmentForm(props) {
                 </label>
                 <label>
                     Due Date 
-                    <input type="date" value={date} onChange={(e) => {
+                    <input type="datetime-local" value={date} onChange={(e) => {
                         setDate(e.target.value);
                     }}/>
                 </label>

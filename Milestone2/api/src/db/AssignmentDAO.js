@@ -21,7 +21,7 @@ function getAssignmentByClass(classId){
       });
 }
 function createAssignment(assignment){
-    return db.query('INSERT INTO assignment (`asm_id`, `clss_id`, `asm_name`, `asm_type`, `asm_due`, `asm_grade`, `asm_status`, `usr_id`)  VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [assignment.id, assignment.classId, assignment.name, assignment.type, assignment.dueDate, assignment.grade, assignment.status, assignment.userId]).then(({results}) => {
+    return db.query('INSERT INTO assignment (`clss_id`, `asm_name`, `asm_type`, `asm_due`, `asm_grade`, `asm_status`, `usr_id`)  VALUES (?, ?, ?, ?, ?, ?, ?)', [assignment.classId, assignment.name, assignment.type, assignment.dueDate, assignment.grade, assignment.status, assignment.userId]).then(({results}) => {
         return getAssignmentById(results.insertId);
       });
 }

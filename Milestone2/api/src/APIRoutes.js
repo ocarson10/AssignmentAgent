@@ -131,6 +131,13 @@ router.post('/users', (req, res) => {
     });
 });
 
+router.post('/assignments', (req, res) => {
+    let assignment = req.body;
+    AssignmentDAO.createAssignment(assignment).then(newAssignment => {
+        res.json(newAssignment);
+    });
+});
+
 router.get('/users/:userId', TokenMiddleware, (req, res) =>{
     const user = users[req.params.userId];
     if(user){
