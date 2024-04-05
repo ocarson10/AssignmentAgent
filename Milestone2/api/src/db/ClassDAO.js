@@ -13,6 +13,12 @@ function getClassByCode(classCode){
           return new Class(results[0]);
       });
 }
+function getClassById(id){
+    return db.query('SELECT * FROM class WHERE clss_id=?', [id]).then(({results}) => {
+        if(results[0])
+          return new Class(results[0]);
+      });
+}
 function createClass(classData){
     return db.query('INSERT INTO class (`clss_id`, `clss_name`, `credit_hours`, `usr_id`) VALUES (?, ?, ?, ?)', [classData.id, classData.name, classData.creditHours, classData.userId]).then(({results}) => {
         return getClassByCode(results.name);
@@ -22,5 +28,6 @@ function createClass(classData){
 module.exports = {
     getClasses: getClasses,
     getClassByCode: getClassByCode,
-    createClass: createClass
+    createClass: createClass,
+    getClassById: getClassById
 };

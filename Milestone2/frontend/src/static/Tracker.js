@@ -35,6 +35,27 @@ function Tracker() {
           });
       }, []);
 
+      React.useEffect(() => {
+        if (user) {
+        const fetchAssignments = async () => {
+            let assignments = await api.getAssignments();
+            assignments = assignments.filter(assignment => assignment.userId === user.id);
+            setAllAssignments(assignments);
+        };
+        fetchAssignments();
+    }
+    }, [user]);
+    React.useEffect(() => {
+        if (user) {
+        const fetchClasses = async () => {
+            let classes = await api.getClasses();
+            classes = classes.filter(singleClass => singleClass.userId === user.id);
+            setAllClasses(classes);
+        };
+        fetchClasses();
+    }
+    }, [user]);
+
     const handleCheckboxChange = (id) => {
         
         if(id === checkedItem){
@@ -67,35 +88,35 @@ function Tracker() {
     }
 
 
-    React.useEffect(() => {
-        if (user) {
-        const fetchAssignments = async () => {
-            let assignments = await api.getAssignments();
-            assignments = assignments.filter(assignment => assignment.userId === user.id);
-            setAllAssignments(assignments);
-        };
-        fetchAssignments();
+    
+
+    const getClassByCode = (id) => {
+        api.getClassById(id)
+        .then(classData => {
+            console.log("CLASS DATA", classData);
+            console.log("CLASS NAME", classData.name);
+
+            return classData.name;
+        })
+        // const classData = await api.getClassById(id);
+        // console.log("ALL CLASSES", allClasses);
+
+        // const classData = allClasses.filter(singleClass => singleClass.id === id);
+      
+            // return classData.name;
+        
     }
-    }, [user]);
-    React.useEffect(() => {
-        if (user) {
-        const fetchClasses = async () => {
-            let classes = await api.getClasses();
-            classes = classes.filter(singleClass => singleClass.userId === user.id);
-            setAllClasses(classes);
-        };
-        fetchClasses();
-    }
-    }, [user]);
 
     const classFilter = () => {
        
         if(selected === "All Classes" || selected === ''){
             return allAssignments;
         }
-        const classesFilered = allAssignments.filter(assignment => assignment.classCode === selected);
+        const classesFilered = allAssignments.filter(assignment => getClassByCode(assignment.classId) === selected);
         return classesFilered;
     }
+
+ 
     return (
         <div id="tracker-page">
             {/* Navigation Bar start */}
@@ -122,7 +143,7 @@ function Tracker() {
                         <select name="classes" id="classes" value={selected} onChange={handleSelectChange}>
                             <option value="All Classes">All Classes</option>
                             {allClasses.map(singleClass => (
-                                <option value={singleClass.name}>{singleClass.name}</option>
+                                <option key={singleClass.id} value={singleClass.name}>{singleClass.name}</option>
                             ))}
                         </select>
                     </div>
@@ -145,7 +166,7 @@ function Tracker() {
                         </thead>
                         <tbody>
                             {allClasses.map(singleClass =>(
-                                <tr key={singleClass.name}>
+                                <tr key={singleClass.id}>
                                     <td>{singleClass.name}</td>
                                     <td>Grade PlaceHolder</td>
                                     <td>{singleClass.creditHours.toString()}</td>
@@ -176,7 +197,7 @@ function Tracker() {
                                 <tr key={assignment.id}>
                                     {/* TODO: Make function that makes "Edit Assignment" and "Delete Assignment buttons appear when assignment is selected" */}
                                     <td><input type="checkbox" name="selectedAssignment" value={assignment.id} checked={assignment.id === checkedItem} onChange={() => handleCheckboxChange(assignment.id)}/></td>
-                                    {/* <td>{assignment.classCode}</td> */}
+                                    <td>{getClassByCode(assignment.classId)}</td>
                                     <td>{assignment.name}</td>
                                     <td>{assignment.type}</td>
                                     <td>{assignment.dueDate}</td>

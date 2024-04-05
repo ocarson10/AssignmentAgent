@@ -49,9 +49,9 @@ router.get('/classes', TokenMiddleware,(req,res) => {
       });
 });
 
-router.get('/classes/:classCode', TokenMiddleware, (req, res) =>{
-    const classCode = req.params.classCode;
-    ClassDAO.getClassByCode(classCode).then(classData => {
+router.get('/classes/:id', TokenMiddleware, (req, res) =>{
+    const id = req.params.id;
+    ClassDAO.getClassById(id).then(classData => {
         if(classData){
             res.json(classData);
         }
