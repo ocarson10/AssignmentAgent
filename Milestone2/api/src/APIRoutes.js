@@ -138,6 +138,13 @@ router.post('/assignments', (req, res) => {
     });
 });
 
+router.post('/classes', (req, res) => {
+    let clss = req.body;
+    ClassDAO.createClass(clss).then(newClass => {
+        res.json(newClass);
+    });
+});
+
 router.get('/users/:userId', TokenMiddleware, (req, res) =>{
     const user = users[req.params.userId];
     if(user){

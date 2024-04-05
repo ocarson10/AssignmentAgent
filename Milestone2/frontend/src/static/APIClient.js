@@ -154,8 +154,15 @@ function handleError(error) {
       userId: userId
     }
     return HTTPClient.post(`${API_BASE}/assignments`, data);
-  }
-  
+  };
+  const addClass = (name, creditHours, userId) => {
+    const data = {
+      name: name,
+      creditHours: creditHours,
+      userId: userId
+    }
+    return HTTPClient.post(`${API_BASE}/classes`, data);
+  };
   export default {
     getCurrentUser,
     getAssignments,
@@ -170,5 +177,6 @@ function handleError(error) {
     logIn,
     logOut,
     createUser,
-    addAssignment
+    addAssignment,
+    addClass
   };

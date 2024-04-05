@@ -42,13 +42,15 @@ function ClassList() {
     }
 
     React.useEffect(() => {
-        const fetchClasses = async () => {
-            let classes = await api.getClasses();
-            classes = classes.filter(singleClass => singleClass.userId === user.id);
-            setAllClasses(classes);
-        };
-        fetchClasses();
-    }, []);
+        if (user) {
+            const fetchClasses = async () => {
+                let classes = await api.getClasses();
+                classes = classes.filter(singleClass => singleClass.userId === user.id);
+                setAllClasses(classes);
+            };
+            fetchClasses();
+        }
+    }, [user]);
 
     React.useEffect(() => {
         const fetchAssignmentTypes = async () => {
@@ -58,7 +60,9 @@ function ClassList() {
         fetchAssignmentTypes();
     }, []);
 
-   
+    if (!user) {
+        return null;
+    } else {
     return (
         <div id="classlist-page">
             {/* Navigation Bar from Olivia's Tracker Page */}
@@ -118,12 +122,12 @@ function ClassList() {
                 </div>
 
                 <AddClass trigger={classModal} setTrigger={setClassModal}>
-                    <ClassForm allClasses={allClasses} />
+                    <ClassForm allClasses={allClasses} user={user}/>
                 </AddClass>
             </div>    
         </div>
         
-    );
+    );}
   }
   
   export default ClassList;
