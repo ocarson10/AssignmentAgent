@@ -9,9 +9,24 @@ function AssignmentForm(props) {
     const[date, setDate] = React.useState('');
     const[grade, setGrade] = React.useState('');
     const[status, setStatus] = React.useState('');
+    const[allAssignmentTypes, setAllAssignmentTypes] = React.useState([]);
+    const[filteredAssignments, setFilteredAssignments] = React.useState([]);
+
+
+    React.useEffect(() => {
+        const fetchAssignmentTypes = async () => {
+            const types = await api.getAssignmentTypes();
+            setAllAssignmentTypes(types);
+        };
+        fetchAssignmentTypes();
+    }, []);
+
+   
 
     const handleSelectChange = (event) => {
         setSelected(event.target.value);
+        const filteredAssignments = allAssignmentTypes.filter( type => type.classId == event.target.value);
+        setFilteredAssignments(filteredAssignments);
     };
     const handleSubmit = (e) => {
         console.log("Selected", selected);
@@ -64,10 +79,11 @@ function AssignmentForm(props) {
                     <select name="type" id="type" value={type} onChange={(e) => {
                         setType(e.target.value);
                     }}>
-                        <option value="Select Type">Select a Type</option>
-                        <option value="Homework">Homework</option>
-                        <option value="Lab">Lab</option>
-                        <option value="Exam">Exam</option>                       
+                        <option value="Select Type">Select a Type</option> 
+                        {filteredAssignments.map((type, index) => (
+                        <option key={index} value={type.name}>{type.name}</option>
+                        ))}
+                                          
                     </select>
                 </label>
                 <label>
@@ -88,9 +104,11 @@ function AssignmentForm(props) {
                     <select name="status" id="status" value={status} onChange={(e) => {
                         setStatus(e.target.value);
                     }}>
+                         <option value="Select Status">Select Status</option>
                         <option value="Not Started">Not Started</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>                       
+                       
                     </select>
                 </label>
                 <br />
