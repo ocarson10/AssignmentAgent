@@ -143,14 +143,15 @@ function handleError(error) {
     }
     return HTTPClient.post(`${API_BASE}/users`, data);
   };
-  const addAssignment = (classCode, name, type, dueDate, grade, status) => {
+  const addAssignment = (classId, name, type, dueDate, grade, status, userId) => {
     const data = {
-      classCode: classCode,
+      classId: classId,
       name: name,
       type: type,
       dueDate: dueDate,
       grade: grade,
-      status: status
+      status: status,
+      userId: userId
     }
     return HTTPClient.post(`${API_BASE}/assignments`, data);
   }

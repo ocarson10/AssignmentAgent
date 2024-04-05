@@ -3,7 +3,7 @@ import api from "../APIClient.js";
 
 // When I get Back: Move this over to tracker.js to prevent fetch errors
 function AssignmentForm(props) {
-    const[selected, setSelected] = React.useState('');
+    const[selected, setSelected] = React.useState(0);
     const[name, setName] = React.useState('');
     const[type, setType] = React.useState('');
     const[date, setDate] = React.useState('');
@@ -14,8 +14,15 @@ function AssignmentForm(props) {
         setSelected(event.target.value);
     };
     const handleSubmit = (e) => {
+        console.log("Selected", selected);
+        console.log("Name", name);
+        console.log("Type", type);
+        console.log("Grade", grade);
+        console.log("data", date);
+        console.log("status", status);
+        console.log("userid",props.user.id);
         // should eventually post assignment to db
-        api.addAssignment(selected.value, name.value, type.value, date.value, grade.value, status.value).then(userData => {
+        api.addAssignment(selected, name, type, date, grade, status, props.user.id).then(userData => {
             document.location = "./";
             console.log("PASS");
         }).catch((err) => {
@@ -39,8 +46,9 @@ function AssignmentForm(props) {
                 <label>
                     Class Code 
                     <select name="classes" id="classes" value={selected} onChange={handleSelectChange}>
+                      <option value="All Classes">All Classes</option>
                         {props.allClasses.map(singleClass => (
-                            <option value={singleClass.name}>{singleClass.name}</option>
+                            <option key={singleClass.id} value={singleClass.id}>{singleClass.name}</option>
                         ))}
                 </select>
                 </label>
@@ -56,6 +64,7 @@ function AssignmentForm(props) {
                     <select name="type" id="type" value={type} onChange={(e) => {
                         setType(e.target.value);
                     }}>
+                        <option value="Select Type">Select a Type</option>
                         <option value="Homework">Homework</option>
                         <option value="Lab">Lab</option>
                         <option value="Exam">Exam</option>                       

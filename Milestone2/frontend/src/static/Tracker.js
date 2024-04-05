@@ -219,7 +219,7 @@ function Tracker() {
                             
                         )}
                         <AddAssignment trigger={assignmentModal} setTrigger={setAssignmentModal}>
-                            <AssignmentForm allClasses={allClasses} isEdit={isEdit} />
+                            <AssignmentForm allClasses={allClasses} isEdit={isEdit} user={user} />
                         </AddAssignment>
 
                 </div>    
