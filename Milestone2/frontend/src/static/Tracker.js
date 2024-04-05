@@ -90,22 +90,12 @@ function Tracker() {
 
     
 
+
     const getClassByCode = (id) => {
-        api.getClassById(id)
-        .then(classData => {
-            console.log("CLASS DATA", classData);
-            console.log("CLASS NAME", classData.name);
-
-            return classData.name;
-        })
-        // const classData = await api.getClassById(id);
-        // console.log("ALL CLASSES", allClasses);
-
-        // const classData = allClasses.filter(singleClass => singleClass.id === id);
-      
-            // return classData.name;
-        
+        const classFound = allClasses.find(singleClass => singleClass.id === id);
+        return classFound ? classFound.name : ''; 
     }
+
 
     const classFilter = () => {
        
