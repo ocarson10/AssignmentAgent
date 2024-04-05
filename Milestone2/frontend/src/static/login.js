@@ -58,7 +58,7 @@ const Login = (props) => {
             <br />
             <div className={'inputContainer'}>
                 <label htmlFor="passField">Password</label>
-                <input id="passField"
+                <input type="password" id="passField"
                 value={password}
                 onChange={(ev) => setPassword(ev.target.value)}
                 className={'inputBox'}
@@ -104,7 +104,7 @@ const Login = (props) => {
           </div>
           <div className={'inputContainer'}>
               <label htmlFor="newPassField">Password</label>
-                <input id="newPassField"
+                <input type="password" id="newPassField" 
                 value={newPassword}
                 onChange={(ev) => setNewPassword(ev.target.value)}
                 className={'inputBox'}
