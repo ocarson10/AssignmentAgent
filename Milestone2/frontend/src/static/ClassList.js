@@ -21,7 +21,21 @@ function ClassList() {
     const[classModal, setClassModal] = React.useState(false);
     const[allAssignmentTypes, setAllAssignmentTypes] = React.useState([]);
     const[checkedItem] = React.useState(null);
+    const[user, setUser] = React.useState(null);
 
+    React.useEffect(() => {
+        api.getCurrentUser()
+          .then(user => {
+            setUser(user);
+          })
+          .catch(error => {
+            if (error.status === 401) {
+              window.location = './';
+            } else {
+              console.log(`${error.status}`, error);
+            }
+          });
+      }, []);
 
     const handlePopupClass = (event) => {
         setClassModal(true);
@@ -29,7 +43,8 @@ function ClassList() {
 
     React.useEffect(() => {
         const fetchClasses = async () => {
-            const classes = await api.getClasses();
+            let classes = await api.getClasses();
+            classes = classes.filter(singleClass => singleClass.userId === user.id);
             setAllClasses(classes);
         };
         fetchClasses();

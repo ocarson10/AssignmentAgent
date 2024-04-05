@@ -14,14 +14,14 @@ function getAssignmentById(assignmentId){
       });
 }
 
-function getAssignmentByClass(classCode){
-    return db.query('SELECT * FROM assignment WHERE class_name=?', [classCode]).then(({results}) => {
+function getAssignmentByClass(classId){
+    return db.query('SELECT * FROM assignment WHERE clss_id=?', [classId]).then(({results}) => {
         if(results)
         return results.map(assignment => new Assignment(assignment)); ;
       });
 }
 function createAssignment(assignment){
-    return db.query('INSERT INTO assignment (`asm_id`, `class_name`, `asm_name`, `asm_type`, `asm_due`, `asm_grade`, `asm_status`)  VALUES (?, ?, ?, ?, ?, ?, ?)', [assignment.id, assignment.classId, assignment.name, assignment.type, assignment.dueDate, assignment.grade, assignment.status]).then(({results}) => {
+    return db.query('INSERT INTO assignment (`asm_id`, `clss_id`, `asm_name`, `asm_type`, `asm_due`, `asm_grade`, `asm_status`, `usr_id`)  VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [assignment.id, assignment.classId, assignment.name, assignment.type, assignment.dueDate, assignment.grade, assignment.status, assignment.userId]).then(({results}) => {
         return getAssignmentById(results.insertId);
       });
 }

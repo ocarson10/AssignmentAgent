@@ -68,18 +68,24 @@ function Tracker() {
 
 
     React.useEffect(() => {
+        if (user) {
         const fetchAssignments = async () => {
-            const assignments = await api.getAssignments();
+            let assignments = await api.getAssignments();
+            assignments = assignments.filter(assignment => assignment.userId === user.id);
             setAllAssignments(assignments);
         };
         fetchAssignments();
+    }
     }, [user]);
     React.useEffect(() => {
+        if (user) {
         const fetchClasses = async () => {
-            const classes = await api.getClasses();
+            let classes = await api.getClasses();
+            classes = classes.filter(singleClass => singleClass.userId === user.id);
             setAllClasses(classes);
         };
         fetchClasses();
+    }
     }, [user]);
 
     const classFilter = () => {
@@ -170,7 +176,7 @@ function Tracker() {
                                 <tr key={assignment.id}>
                                     {/* TODO: Make function that makes "Edit Assignment" and "Delete Assignment buttons appear when assignment is selected" */}
                                     <td><input type="checkbox" name="selectedAssignment" value={assignment.id} checked={assignment.id === checkedItem} onChange={() => handleCheckboxChange(assignment.id)}/></td>
-                                    <td>{assignment.classCode}</td>
+                                    {/* <td>{assignment.classCode}</td> */}
                                     <td>{assignment.name}</td>
                                     <td>{assignment.type}</td>
                                     <td>{assignment.dueDate}</td>

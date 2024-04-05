@@ -75,8 +75,8 @@ function handleError(error) {
       })
       .catch(handleError);
   };
-  const getAssignmentTypeByClass = (classCode) => {
-    return fetch(API_BASE + `/classes/${classCode}/assignment-types`)
+  const getAssignmentTypeByClass = (classId) => {
+    return fetch(API_BASE + `/classes/${classId}/assignment-types`)
       .then(checkResponse)
       .then(res => {
         return res.json();

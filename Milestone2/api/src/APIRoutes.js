@@ -64,9 +64,9 @@ router.get('/classes/:classCode', TokenMiddleware, (req, res) =>{
       });
 });
 
-router.get('/classes/:classCode/assignment-types', TokenMiddleware, (req, res) => {
-        const classCode = req.params.classCodes;
-        AssignmentTypeDAO.getAssignmentTypeByClass(classCode).then(types =>{
+router.get('/classes/:classId/assignment-types', TokenMiddleware, (req, res) => {
+        const classId = req.params.classId;
+        AssignmentTypeDAO.getAssignmentTypeByClass(classId).then(types =>{
             res.json(types);
         })
         .catch(err => {
@@ -88,24 +88,6 @@ router.get('/assignment-types', TokenMiddleware, (req,res) => {
     .catch(err => {
         res.status(400).json({error: err});
     })
-});
-
-router.get('/users', TokenMiddleware, (req,res) => {
-    res.json(Object.values(users));
-});
-router.post('/users', (req, res) => {
-    let user = req.body;
-    UserDAO.createUser(user).then(newUser => {
-        res.json(newUser);
-    });
-});
-router.get('/users/:userId', TokenMiddleware, (req, res) =>{
-    const user = users[req.params.userId];
-    if(user){
-        res.json(user);
-    } else {
-        res.status(404).json({error: "User not found"});
-    }
 });
 
 router.post('/users/login', (req,  res) => {
@@ -136,7 +118,26 @@ router.post('/users/logout', (req,  res) => {
 router.get('/users/current', TokenMiddleware, (req,  res) => {
     console.log("CURRENT USER:",req.user);
     res.json(req.user);
+});
 
-  });
+router.get('/users', TokenMiddleware, (req,res) => {
+    res.json(Object.values(users));
+});
+
+router.post('/users', (req, res) => {
+    let user = req.body;
+    UserDAO.createUser(user).then(newUser => {
+        res.json(newUser);
+    });
+});
+
+router.get('/users/:userId', TokenMiddleware, (req, res) =>{
+    const user = users[req.params.userId];
+    if(user){
+        res.json(user);
+    } else {
+        res.status(404).json({error: "User not found"});
+    }
+});
 
 module.exports = router;
