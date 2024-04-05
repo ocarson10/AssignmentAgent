@@ -20,8 +20,8 @@ function getClassById(id){
       });
 }
 function createClass(classData){
-    return db.query('INSERT INTO class (`clss_id`, `clss_name`, `credit_hours`, `usr_id`) VALUES (?, ?, ?, ?)', [classData.id, classData.name, classData.creditHours, classData.userId]).then(({results}) => {
-        return getClassByCode(results.name);
+    return db.query('INSERT INTO class (`clss_name`, `credit_hours`, `usr_id`) VALUES (?, ?, ?)', [classData.name, classData.creditHours, classData.userId]).then(({results}) => {
+        return getClassById(results.insertId);
       });
 }
 
