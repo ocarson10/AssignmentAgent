@@ -45,8 +45,8 @@
 
 #### [Mico Guevarra]
 
-- 
-
+- Wrote new API routes for adding a class and adding assignment
+- Worked on forms for adding a class and adding an assignment
 
 #### Milestone Effort Contribution
 
