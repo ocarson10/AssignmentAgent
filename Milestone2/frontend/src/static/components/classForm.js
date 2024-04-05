@@ -3,7 +3,7 @@ import api from "../APIClient.js";
 
 function ClassForm(props) {
     const[className, setClassName] = React.useState(0);
-    const[creditHours, setCreditHours] = React.useState('');
+    const[creditHours, setCreditHours] = React.useState(0);
     const[assignmentType, setAssignmentType] = React.useState('');
     const[percentage, setPercentage] = React.useState('');
 
@@ -38,7 +38,7 @@ function ClassForm(props) {
                 <br></br>
                 <label>
                     Credit Hours
-                    <input type="text" value={creditHours} onChange={(e) => {
+                    <input type="number" value={creditHours} onChange={(e) => {
                         setCreditHours(e.target.value);
                     }}/>
                 </label>

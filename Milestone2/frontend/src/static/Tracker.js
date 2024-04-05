@@ -143,6 +143,7 @@ function Tracker() {
                             </select>
                         </div>
                         <div id="top-btns">
+                        <a href="/classlist"><button id="Classlist" href="/classlist">Class List</button></a>
                             <button value="View Calendar"><FontAwesomeIcon icon={faCalendar} /></button>
                             <button id="GPA" onClick={handlePopupGPA}>GPA</button>
                         </div>
