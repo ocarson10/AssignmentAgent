@@ -109,122 +109,124 @@ function Tracker() {
         return classesFilered;
     }
 
- 
-    return (
-        <div id="tracker-page">
-            {/* Navigation Bar start */}
-            <Navbar expand="lg" className="bg-body-tertiary" >
-                <Container fluid>
-                    <Navbar.Brand href="#home"><img src={Image} alt="AssignmentAgent Logo"/></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link href="#home">{user.first_name}</Nav.Link>
-                        <Nav.Link onClick={onSignOutClick}>Sign Out</Nav.Link>
-                    </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            {/* Navigation Bar end */}
-            <div id="tracker-elements">
+    if (!user) {
+        return null;
+    } else {
+        return (
+            <div id="tracker-page">
+                {/* Navigation Bar start */}
+                <Navbar expand="lg" className="bg-body-tertiary" >
+                    <Container fluid>
+                        <Navbar.Brand href="#home"><img src={Image} alt="AssignmentAgent Logo"/></Navbar.Brand>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link>{user.first_name} {user.last_name}</Nav.Link>
+                            <Nav.Link onClick={onSignOutClick}>Sign Out</Nav.Link>
+                        </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+                {/* Navigation Bar end */}
+                <div id="tracker-elements">
 
-           
-                <h2>Assignment Tracker</h2>
-                <div id="table-btns">
-                    <div class="dropdown">
-                        <label>Filter By:</label>
-                        <select name="classes" id="classes" value={selected} onChange={handleSelectChange}>
-                            <option value="All Classes">All Classes</option>
-                            {allClasses.map(singleClass => (
-                                <option key={singleClass.id} value={singleClass.name}>{singleClass.name}</option>
-                            ))}
-                        </select>
+            
+                    <h2>Assignment Tracker</h2>
+                    <div id="table-btns">
+                        <div class="dropdown">
+                            <label>Filter By:</label>
+                            <select name="classes" id="classes" value={selected} onChange={handleSelectChange}>
+                                <option value="All Classes">All Classes</option>
+                                {allClasses.map(singleClass => (
+                                    <option key={singleClass.id} value={singleClass.name}>{singleClass.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div id="top-btns">
+                            <button value="View Calendar"><FontAwesomeIcon icon={faCalendar} /></button>
+                            <button id="GPA" onClick={handlePopupGPA}>GPA</button>
+                        </div>
                     </div>
-                    <div id="top-btns">
-                        <button value="View Calendar"><FontAwesomeIcon icon={faCalendar} /></button>
-                        <button id="GPA" onClick={handlePopupGPA}>GPA</button>
-                    </div>
-                </div>
-               
-               
-                <GPAPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                    <h3>GPA</h3>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Class Code</th>
-                                <th>Grade</th>
-                                <th>Credit Hours</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {allClasses.map(singleClass =>(
-                                <tr key={singleClass.id}>
-                                    <td>{singleClass.name}</td>
-                                    <td>Grade PlaceHolder</td>
-                                    <td>{singleClass.creditHours.toString()}</td>
-                                </tr>
-                            ))}
-
-                        </tbody>
-                    </table>
-                    {/* TODO: Make function that calculates gpa based on grade and credit hours */}
-                    <p>Final GPA: --</p>
-                </GPAPopup>
                 
                 
+                    <GPAPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                        <h3>GPA</h3>
                         <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                            <th>Select</th>
-                                <th>Class Code</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Due Date</th>
-                                <th>Grade</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {classFilter().map(assignment =>(
-                                <tr key={assignment.id}>
-                                    {/* TODO: Make function that makes "Edit Assignment" and "Delete Assignment buttons appear when assignment is selected" */}
-                                    <td><input type="checkbox" name="selectedAssignment" value={assignment.id} checked={assignment.id === checkedItem} onChange={() => handleCheckboxChange(assignment.id)}/></td>
-                                    <td>{getClassByCode(assignment.classId)}</td>
-                                    <td>{assignment.name}</td>
-                                    <td>{assignment.type}</td>
-                                    <td>{assignment.dueDate}</td>
-                                    <td>{assignment.grade}</td>
-                                    <td>{assignment.status}</td>
+                            <thead>
+                                <tr>
+                                    <th>Class Code</th>
+                                    <th>Grade</th>
+                                    <th>Credit Hours</th>
                                 </tr>
-                            ))}
+                            </thead>
+                            <tbody>
+                                {allClasses.map(singleClass =>(
+                                    <tr key={singleClass.id}>
+                                        <td>{singleClass.name}</td>
+                                        <td>Grade PlaceHolder</td>
+                                        <td>{singleClass.creditHours.toString()}</td>
+                                    </tr>
+                                ))}
 
-                        </tbody>
-                    </table>
-                    {!checkedItem && (
-                
-                        <button onClick={handlePopupAssignment}>Add Assignment</button>
+                            </tbody>
+                        </table>
+                        {/* TODO: Make function that calculates gpa based on grade and credit hours */}
+                        <p>Final GPA: --</p>
+                    </GPAPopup>
                     
-                    )}
-                
-                    {checkedItem && (
-                        <>
-                            <button onClick={handlePopupAssignment}>Edit Assignment</button>
-                            {/* Add functionality to delete assignment from db */}
-                            <button>Delete Assignment</button>
-                        </>
                     
+                            <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                <th>Select</th>
+                                    <th>Class Code</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Due Date</th>
+                                    <th>Grade</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {classFilter().map(assignment =>(
+                                    <tr key={assignment.id}>
+                                        {/* TODO: Make function that makes "Edit Assignment" and "Delete Assignment buttons appear when assignment is selected" */}
+                                        <td><input type="checkbox" name="selectedAssignment" value={assignment.id} checked={assignment.id === checkedItem} onChange={() => handleCheckboxChange(assignment.id)}/></td>
+                                        <td>{getClassByCode(assignment.classId)}</td>
+                                        <td>{assignment.name}</td>
+                                        <td>{assignment.type}</td>
+                                        <td>{assignment.dueDate}</td>
+                                        <td>{assignment.grade}</td>
+                                        <td>{assignment.status}</td>
+                                    </tr>
+                                ))}
+
+                            </tbody>
+                        </table>
+                        {!checkedItem && (
+                    
+                            <button onClick={handlePopupAssignment}>Add Assignment</button>
                         
-                    )}
-                    <AddAssignment trigger={assignmentModal} setTrigger={setAssignmentModal}>
-                        <AssignmentForm allClasses={allClasses} isEdit={isEdit} />
-                    </AddAssignment>
+                        )}
+                    
+                        {checkedItem && (
+                            <>
+                                <button onClick={handlePopupAssignment}>Edit Assignment</button>
+                                {/* Add functionality to delete assignment from db */}
+                                <button>Delete Assignment</button>
+                            </>
+                        
+                            
+                        )}
+                        <AddAssignment trigger={assignmentModal} setTrigger={setAssignmentModal}>
+                            <AssignmentForm allClasses={allClasses} isEdit={isEdit} />
+                        </AddAssignment>
 
-             </div>    
-        </div>
-        
+                </div>    
+            </div>
+            
 
-    );
+        );}
   }
   
   export default Tracker;
