@@ -22,17 +22,20 @@ function Tracker() {
     const [user, setUser] = React.useState(null);
 
     React.useEffect(() => {
-        api.getCurrentUser()
-          .then(user => {
-            setUser(user);
-          })
-          .catch(error => {
-            if (error.status === 401) {
-              window.location = './';
+        const fetchCurrentUser = async () => {
+            try {
+                const user = await api.getCurrentUser();
+                setUser(user);
+            } catch(error) {
+                if (error.status === 401) {
+                window.location = './';
             } else {
-              console.log(`${error.status}`, error);
+                console.log(`${error.status}`, error);
             }
-          });
+          };
+        };
+
+        fetchCurrentUser();
       }, []);
 
       React.useEffect(() => {
@@ -116,7 +119,7 @@ function Tracker() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link href="#home">{user.first_name}</Nav.Link>
                         <Nav.Link onClick={onSignOutClick}>Sign Out</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
