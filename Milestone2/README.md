@@ -33,7 +33,10 @@
 
 #### [Olivia Carson]
 
-- 
+- Database connection
+- Added Routes and DAOs for User, Assignment, Class, and Assignment Type
+- Updated Frontend API to show database information
+- Implemented User Sign Up form
 
 #### [Austin Heyward]
 
