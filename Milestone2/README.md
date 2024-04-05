@@ -52,4 +52,4 @@
 
 | Olivia Carson | Austin Heyward| Mico Guevarra |
 | ------------- | ------------- | ------------- |
-|               |               |               |
+| 33%           | 33%           | 33%           |
