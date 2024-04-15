@@ -1,0 +1,53 @@
+#classlist-content {
+    margin: 2%;
+}
+#classlist-content h2 {
+    margin-bottom: 40px;
+}
+#classlist-content h4 {
+    margin-bottom: 40px;
+}
+
+#classlist-btns {
+    display: flex;
+    justify-content: right;
+}
+#card-container {
+    display: flex;
+}
+#card-btns {
+    display: flex;
+    justify-content: right;
+}
+.card {
+    margin: 1%;
+    width: 18em;
+}
+.card ul {
+    list-style-type: none;
+    padding: 0;
+}
+.card-header {
+    font-size: large;
+}
+.card-title {
+    font-size: medium;
+}
+#classlist-page {
+    max-width: 100%;
+}
+/* Updates sizing of elements for smaller screens */
+@media all and (max-width: 575px){
+    .card {
+        font-size: small;
+    }
+    .card-title {
+        font-size: small;
+    }
+    .card-header {
+        font-size: medium;
+    }
+    button {
+        font-size: large;
+    }
+}
