@@ -9,7 +9,6 @@ function checkResponse(res) {
 }
 
 function handleError(error) {
-    console.log("ERROR", error);
     throw error;
   }
   

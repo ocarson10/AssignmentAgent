@@ -8,16 +8,21 @@ function ClassForm(props) {
     const[percentage, setPercentage] = React.useState('');
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         // should eventually post assignment to db
         console.log("name", className);
         console.log("hours", creditHours);
         console.log("userid", props.user.id);
         api.addClass(className, creditHours, props.user.id).then(userData => {
-            document.location = "./";
+            document.location = "./classlist";
             console.log("PASS");
         }).catch((err) => {
-            console.log("ERROR addClass");
-            console.log(err);
+            console.log("ERROR addClass", err);
+            if(err.message === 'Offline' || err.status === 503) {
+                document.location = "./offline";
+              } else {
+                console.log(err);
+              }
         })
     }
    

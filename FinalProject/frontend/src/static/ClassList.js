@@ -41,6 +41,20 @@ function ClassList() {
         setClassModal(true);
     }
 
+    const onSignOutClick = () => {
+        api.logOut().then(() => {
+          document.location = "./";
+        }).catch((err) => {
+          console.log("ERROR");
+
+          if(err.message === 'Offline' || err.status === 503) {
+            document.location = "./offline";
+          } else {
+            console.log(err);
+          }
+        });
+    }
+
     React.useEffect(() => {
         if (user) {
             const fetchClasses = async () => {
@@ -54,8 +68,17 @@ function ClassList() {
 
     React.useEffect(() => {
         const fetchAssignmentTypes = async () => {
-            const types = await api.getAssignmentTypes();
-            setAllAssignmentTypes(types);
+            try{
+                const types = await api.getAssignmentTypes();
+                setAllAssignmentTypes(types);
+            } catch(err){
+                if(err.message === 'Offline' || err.status === 503) {
+                    document.location = "./offline";
+                  } else {
+                    console.log(err);
+                  }
+            }
+            
         };
         fetchAssignmentTypes();
     }, []);
@@ -74,8 +97,8 @@ function ClassList() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Sign Out</Nav.Link>
+                        <Nav.Link> Welcome, {user.first_name} {user.last_name}</Nav.Link>
+                        <Nav.Link onClick={onSignOutClick}>Sign Out</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
                 </Container>

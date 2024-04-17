@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import api from "./APIClient.js";
-import { useNavigate } from 'react-router-dom'
 import "./css/login.css";
 import Image from "./images/assignment-agent-logo.png"
 import SignUpPopup from './components/SignUpPopup.js';
@@ -21,10 +20,18 @@ const Login = (props) => {
   // const navigate = useNavigate()
 
   const onButtonClick = () => {
+    console.log("Login Button Clicked");
     api.logIn(username, password).then(userData => {
       document.location = "./tracker";
     }).catch((err) => {
-      console.log("ERROR");
+      console.log("Login Button ERROR");
+     
+      if(err.message === 'Offline' || err.status === 503) {
+        document.location = "./offline";
+      } else {
+        console.log(err);
+      }
+     
     });
   }
 
@@ -35,7 +42,13 @@ const Login = (props) => {
     api.createUser(newFirstName, newLastName,newUsername,newPassword).then(userData => {
       document.location = "./";
     }).catch((err) => {
-      console.log("ERROR");
+      console.log("ERROR creating user");
+
+      if(err.message === 'Offline' || err.status === 503) {
+        document.location = "./offline";
+      } else {
+        console.log(err);
+      }
     });
   }
   return (

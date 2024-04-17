@@ -15,8 +15,16 @@ function AssignmentForm(props) {
 
     React.useEffect(() => {
         const fetchAssignmentTypes = async () => {
+            try{
             const types = await api.getAssignmentTypes();
             setAllAssignmentTypes(types);
+            } catch(err){
+                if(err.message === 'Offline' || err.status === 503) {
+                    document.location = "./offline";
+                  } else {
+                    console.log(err);
+                  }
+            }
         };
         fetchAssignmentTypes();
     }, []);
@@ -41,8 +49,13 @@ function AssignmentForm(props) {
             document.location = "./";
             console.log("PASS");
         }).catch((err) => {
-            console.log("ERROR addAssignment");
-            console.log(err);
+            console.log("ERROR addAssignment", err);
+
+            if(err.message === 'Offline' || err.status === 503) {
+                document.location = "./offline";
+              } else {
+                console.log(err);
+              }
         })
     }
    

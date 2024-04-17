@@ -87,6 +87,12 @@ function Tracker() {
           document.location = "./";
         }).catch((err) => {
           console.log("ERROR");
+
+          if(err.message === 'Offline' || err.status === 503) {
+            document.location = "./offline";
+          } else {
+            console.log(err);
+          }
         });
     }
 
@@ -121,7 +127,7 @@ function Tracker() {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link>{user.first_name} {user.last_name}</Nav.Link>
+                            <Nav.Link> Welcome, {user.first_name} {user.last_name}</Nav.Link>
                             <Nav.Link onClick={onSignOutClick}>Sign Out</Nav.Link>
                         </Nav>
                         </Navbar.Collapse>
