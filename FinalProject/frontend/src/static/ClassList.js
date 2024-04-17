@@ -16,10 +16,13 @@ import Card from 'react-bootstrap/Card';
 import AddClass from "./components/addClass.js";
 import ClassForm from "./components/classForm.js";
 import Image from "./images/assignment-agent-logo.png"
+import AssignmentTypeForm from "./components/assignmentTypeForm.js";
+import AddAssignmentType from "./components/addAssignmentType.js";
 function ClassList() {
     const[allClasses, setAllClasses] = React.useState([]);
     const[classModal, setClassModal] = React.useState(false);
     const[allAssignmentTypes, setAllAssignmentTypes] = React.useState([]);
+    const[assignmentTypeModal, setAssignmentTypeModal] = React.useState(false);
     const[checkedItem] = React.useState(null);
     const[user, setUser] = React.useState(null);
 
@@ -39,6 +42,10 @@ function ClassList() {
 
     const handlePopupClass = (event) => {
         setClassModal(true);
+    }
+
+    const handlePopupAssignmentType = (event) => {
+        setAssignmentTypeModal(true);
     }
 
     const onSignOutClick = () => {
@@ -114,6 +121,10 @@ function ClassList() {
                     {!checkedItem && (
                         <button onClick={handlePopupClass}>Add Class</button>
                     )}
+
+                    {!checkedItem && (
+                        <button onClick={handlePopupAssignmentType}>Add Assignment Type</button>
+                    )}
                 </div>
 
                 <div id="card-container">
@@ -147,6 +158,10 @@ function ClassList() {
                 <AddClass trigger={classModal} setTrigger={setClassModal}>
                     <ClassForm allClasses={allClasses} user={user}/>
                 </AddClass>
+
+                <AddAssignmentType trigger={assignmentTypeModal} setTrigger={setAssignmentTypeModal}>
+                    <AssignmentTypeForm allAssignmentTypes={allAssignmentTypes} user={user}/>
+                </AddAssignmentType>
             </div>    
         </div>
         
