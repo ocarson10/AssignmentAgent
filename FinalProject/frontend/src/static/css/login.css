@@ -18,6 +18,8 @@
 #logo {
     width: 50%;
     height: auto;
+    min-width: 250px;
+
 }
 
 .loginBox {
@@ -34,6 +36,7 @@
     padding-bottom: 40px;
     padding-left: 40px;
     padding-right: 40px;
+    min-width: 250px;
 }
 
 .loginHeader {
@@ -80,4 +83,8 @@ label {
 
 small {
     color: #8f8f8f;
+}
+
+.errorBox {
+    color:red;
 }

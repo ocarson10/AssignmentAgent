@@ -15,11 +15,13 @@ const Login = (props) => {
   const [newLastName, setNewLastName] = useState('')
   const [newUsername, setNewUsername] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  const [error, setError] = useState(null);
   // const[assignmentModal, setAssignmentModal] = React.useState(false);
 
   // const navigate = useNavigate()
 
   const onButtonClick = () => {
+    setError(null);
     console.log("Login Button Clicked");
     api.logIn(username, password).then(userData => {
       document.location = "./tracker";
@@ -29,6 +31,11 @@ const Login = (props) => {
       if(err.message === 'Offline' || err.status === 503) {
         document.location = "./offline";
       } else {
+        if(err.status === 401 || err.status === 400) {
+          setError("Invalid username or password");
+        }else {
+          setError(err.message || 'An error occurred while logging in');
+        }
         console.log(err);
       }
      
@@ -53,12 +60,14 @@ const Login = (props) => {
   }
   return (
     <div className={'mainContainer'}>
+        
         <img id="logo" src={Image} alt="AssignmentAgent Logo"/>
         <br />
         <div className={'loginBox'}>
             <div className={'loginHeader'}>
                 <h2>LOGIN</h2>
             </div>
+            {error && <div className="errorBox">{error}</div>}
             <div className={'inputContainer'}>
                 <label htmlFor="userField">Username</label>
                 <input id="userField"
