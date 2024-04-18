@@ -2,22 +2,24 @@ import React from "react";
 import api from "../APIClient.js";
 
 function AssignmentTypeForm(props) {
-    const[className, setClassName] = React.useState(0);
-    const[creditHours, setCreditHours] = React.useState(0);
-    const[assignmentType, setAssignmentType] = React.useState('');
-    const[percentage, setPercentage] = React.useState('');
+    const[typeName, setTypeName] = React.useState('');
+    const[typeClass, setTypeClass] = React.useState(0);
+    const[typePercentage, setTypePercentage] = React.useState(0);
+    // const[assignmentType, setAssignmentType] = React.useState('');
+    // const[percentage, setPercentage] = React.useState('');
+    const[selected, setSelected] = React.useState(0);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // should eventually post assignment to db
-        console.log("name", className);
-        console.log("hours", creditHours);
-        console.log("userid", props.user.id);
-        api.addClass(className, creditHours, props.user.id).then(userData => {
+        console.log("name", typeName);
+        console.log("class", typeClass);
+        console.log("percentage", typePercentage);
+        api.addAssignmentType(typeName, typeClass, typePercentage).then(userData => {
             document.location = "./classlist";
             console.log("PASS");
         }).catch((err) => {
-            console.log("ERROR addClass", err);
+            console.log("ERROR addAssignmentType", err);
             if(err.message === 'Offline' || err.status === 503) {
                 document.location = "./offline";
               } else {
@@ -28,23 +30,35 @@ function AssignmentTypeForm(props) {
    
     return (
 
-        <div className="assignmentForm">
+        <div className="assignmentTypeForm">
              {!props.isEdit && (
-                <h3>Add Class</h3>
+                <h3>Add Assignment Type</h3>
             )}
             
             <form>
                 <label>
-                    Class Name
-                    <input type="text" value={className} onChange={(e) => {
-                        setClassName(e.target.value);
+                    Class Code 
+                    <select name="classes" id="classes" value={typeClass} onChange={(e) => {
+                        setTypeClass(e.target.value);
+                    }}>
+                        <option value="Select a Class">Select a Class</option>
+                        {props.allClasses.map(singleClass => (
+                            <option key={singleClass.id} value={singleClass.id}>{singleClass.name}</option>
+                        ))}
+                    </select>
+                </label>
+                <br></br>
+                <label>
+                    Assignment Type Name
+                    <input type="text" value={typeName} onChange={(e) => {
+                        setTypeName(e.target.value);
                     }}/>
                 </label>
                 <br></br>
                 <label>
-                    Credit Hours
-                    <input type="number" value={creditHours} onChange={(e) => {
-                        setCreditHours(e.target.value);
+                    Percentage of Grade
+                    <input type="number" value={typePercentage} onChange={(e) => {
+                        setTypePercentage(e.target.value);
                     }}/>
                 </label>
                 {/*

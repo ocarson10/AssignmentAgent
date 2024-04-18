@@ -162,6 +162,16 @@ function handleError(error) {
     }
     return HTTPClient.post(`${API_BASE}/classes`, data);
   };
+  
+  const addAssignmentType = (name, classId, percentage) => {
+    const data = {
+      name: name,
+      classId: classId,
+      percentage: percentage
+    }
+    return HTTPClient.post(`${API_BASE}/assignmentTypes`, data);
+  }
+
   export default {
     getCurrentUser,
     getAssignments,
@@ -177,5 +187,6 @@ function handleError(error) {
     logOut,
     createUser,
     addAssignment,
-    addClass
+    addClass,
+    addAssignmentType
   };

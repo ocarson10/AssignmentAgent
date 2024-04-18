@@ -46,7 +46,7 @@ function AssignmentForm(props) {
         console.log("userid",props.user.id);
         // should eventually post assignment to db
         api.addAssignment(selected, name, type, date, grade, status, props.user.id).then(userData => {
-            document.location = "./";
+            document.location = "./tracker";
             console.log("PASS");
         }).catch((err) => {
             console.log("ERROR addAssignment", err);

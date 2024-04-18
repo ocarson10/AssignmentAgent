@@ -9,19 +9,19 @@ function getAssignmentTypes() {
 }
 
 function getAssignmentTypeById(typeName, classId){
-    return db.query('SELECT * FROM assignment WHERE type_name=? AND clss_id=?', [typeName, classId]).then(({results}) => {
+    return db.query('SELECT * FROM assignment_type WHERE type_name=? AND clss_id=?', [typeName, classId]).then(({results}) => {
         if(results[0])
           return new AssignmentType(results[0]);
       });
 }
 function getAssignmentTypeByClass(classCode){
-    return db.query('SELECT * FROM assignment WHERE clss_id=?', [classId]).then(({results}) => {
+    return db.query('SELECT * FROM assignment_type WHERE clss_id=?', [classId]).then(({results}) => {
         return results.map(type => new AssignmentType(type)); ;
       });
 }
 function createAssignmentType(type){
     return db.query('INSERT INTO assignment_type (`type_name`, `clss_id`, `percentage`) VALUES (?, ?, ?)', [type.name, type.classId, type.percentage]).then(({results}) => {
-        return getAssignmentTypeById(results.insertId);
+        return getAssignmentTypeById(results.name, results.classId);
       });
 }
 

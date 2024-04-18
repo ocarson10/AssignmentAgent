@@ -160,7 +160,7 @@ function ClassList() {
                 </AddClass>
 
                 <AddAssignmentType trigger={assignmentTypeModal} setTrigger={setAssignmentTypeModal}>
-                    <AssignmentTypeForm allAssignmentTypes={allAssignmentTypes} user={user}/>
+                    <AssignmentTypeForm allAssignmentTypes={allAssignmentTypes} allClasses={allClasses} user={user}/>
                 </AddAssignmentType>
             </div>    
         </div>

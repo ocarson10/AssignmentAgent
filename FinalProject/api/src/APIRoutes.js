@@ -154,4 +154,11 @@ router.get('/users/:userId', TokenMiddleware, (req, res) =>{
     }
 });
 
+router.post('/assignmentTypes', (req, res) => {
+    let assignmentType = req.body;
+    AssignmentTypeDAO.createAssignmentType(assignmentType).then(newAssignmentType => {
+        res.json(newAssignmentType);
+    })
+})
+
 module.exports = router;

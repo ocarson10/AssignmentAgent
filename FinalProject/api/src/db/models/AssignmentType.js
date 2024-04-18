@@ -8,6 +8,5 @@ module.exports = class AssignmentType {
         this.name = data.type_name;
         this.classId = data.clss_id;
         this.percentage = data.percentage;
-       
     }
 };
