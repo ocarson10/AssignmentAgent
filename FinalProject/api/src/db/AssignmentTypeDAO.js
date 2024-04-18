@@ -7,13 +7,17 @@ function getAssignmentTypes() {
         return results.map(type => new AssignmentType(type)); ;
     });
 }
-
-function getAssignmentTypeById(typeName, classId){
-    return db.query('SELECT * FROM assignment_type WHERE type_name=? AND clss_id=?', [typeName, classId]).then(({results}) => {
-        if(results[0])
-          return new AssignmentType(results[0]);
-      });
+function getAssignmentTypeByValues(typeName, classId) {
+    return db.query('SELECT * FROM assignment_type WHERE type_name = ? AND clss_id = ?', [typeName, classId])
+        .then(({ results }) => {
+            return results[0];
+        })
+        .catch(err => {
+            console.error("Error fetching assignment type:", err);
+            throw err;
+        });
 }
+
 function getAssignmentTypeByClass(classCode){
     return db.query('SELECT * FROM assignment_type WHERE clss_id=?', [classId]).then(({results}) => {
         return results.map(type => new AssignmentType(type)); ;
@@ -21,13 +25,13 @@ function getAssignmentTypeByClass(classCode){
 }
 function createAssignmentType(type){
     return db.query('INSERT INTO assignment_type (`type_name`, `clss_id`, `percentage`) VALUES (?, ?, ?)', [type.name, type.classId, type.percentage]).then(({results}) => {
-        return getAssignmentTypeById(results.name, results.classId);
+        return getAssignmentTypeByValues(type.name, type.classId);
       });
 }
 
 module.exports = {
     getAssignmentTypes: getAssignmentTypes,
-    getAssignmentTypeById: getAssignmentTypeById,
+    getAssignmentTypeByValues: getAssignmentTypeByValues,
     getAssignmentTypeByClass: getAssignmentTypeByClass,
     createAssignmentType: createAssignmentType
 };

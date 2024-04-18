@@ -170,7 +170,7 @@ function handleError(error) {
       percentage: percentage
     }
     return HTTPClient.post(`${API_BASE}/assignmentTypes`, data);
-  }
+  };
 
   export default {
     getCurrentUser,

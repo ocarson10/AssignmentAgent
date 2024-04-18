@@ -14,6 +14,7 @@ import Image from "./images/assignment-agent-logo.png"
 function Tracker() {
     const [allAssignments, setAllAssignments] = React.useState([]);
     const[allClasses, setAllClasses] = React.useState([]);
+    const[allAssignmentTypes, setAllAssignmentTypes] = React.useState([]);
     const[selected, setSelected] = React.useState('');
     const[buttonPopup, setButtonPopup] = React.useState(false);
     const[assignmentModal, setAssignmentModal] = React.useState(false);
@@ -59,6 +60,24 @@ function Tracker() {
     }
     }, [user]);
 
+    React.useEffect(() => {
+        if (user) {
+        const fetchAssignmentTypes = async () => {
+            try{
+                const types = await api.getAssignmentTypes();
+                setAllAssignmentTypes(types);
+            } catch(err){
+                if(err.message === 'Offline' || err.status === 503) {
+                    document.location = "./offline";
+                  } else {
+                    console.log(err);
+                  }
+            }
+            
+        };
+        fetchAssignmentTypes();
+    }
+    }, [user]);
     const handleCheckboxChange = (id) => {
         
         if(id === checkedItem){
@@ -105,6 +124,42 @@ function Tracker() {
         return classFound ? classFound.name : ''; 
     }
 
+    const calculateGrade = (classId) => {
+        const assignmentsFound = allAssignments.filter(assignment => assignment.classId === classId);
+        const typesFound = allAssignmentTypes.filter(type => type.classId === classId);
+        let total = 0;
+        if(typesFound.length === 0){
+            return "--";
+        }
+        let percentTotal = 0;
+        typesFound.forEach(type => {
+            percentTotal += type.percentage;
+        })
+        if(percentTotal !== 100){
+            return "--";
+        }
+        typesFound.forEach(type => {
+            let sectionTotal = 0;
+            assignmentsFound.forEach(assignment => {
+                if(assignment.type === type.name){
+                    if(assignment.grade !== null){
+                        const [numerator, denominator] = assignment.grade.split('/');
+                        // Convert strings to numbers
+                        const num = parseFloat(numerator);
+                        const denom = parseFloat(denominator);
+                        // Calculate the decimal value
+                        const decimalGrade = num / denom;
+                        const percentage = type.percentage / 100;
+                        const sectionGrade = decimalGrade * percentage;
+                        sectionTotal += sectionGrade;
+                    }
+                }
+            })
+            total += sectionTotal * 100;
+        });
+        return total.toString();
+    
+    }
 
     const classFilter = () => {
        
@@ -170,7 +225,7 @@ function Tracker() {
                                 {allClasses.map(singleClass =>(
                                     <tr key={singleClass.id}>
                                         <td>{singleClass.name}</td>
-                                        <td>Grade PlaceHolder</td>
+                                        <td>{calculateGrade(singleClass.id)}</td>
                                         <td>{singleClass.creditHours.toString()}</td>
                                     </tr>
                                 ))}
