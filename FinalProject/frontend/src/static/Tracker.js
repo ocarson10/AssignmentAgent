@@ -213,13 +213,13 @@ function Tracker() {
                         <div id="top-btns">
                         <a href="/classlist"><button id="Classlist" href="/classlist">Class List</button></a>
                         <a href="/calendar">   <button value="View Calendar"><FontAwesomeIcon icon={faCalendar} /></button></a>
-                            <button id="GPA" onClick={handlePopupGPA}>GPA</button>
+                            <button id="GPA" onClick={handlePopupGPA}>Grades</button>
                         </div>
                     </div>
                 
                 
                     <GPAPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                        <h3>GPA</h3>
+                        <h3>Grades</h3>
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
@@ -239,8 +239,6 @@ function Tracker() {
 
                             </tbody>
                         </table>
-                        {/* TODO: Make function that calculates gpa based on grade and credit hours */}
-                        <p>Final GPA: --</p>
                     </GPAPopup>
                     
                     
