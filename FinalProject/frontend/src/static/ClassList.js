@@ -151,7 +151,7 @@ function ClassList() {
                                         .map((filteredType, index) => (
                                             <li key={index}>
                                             {filteredType.name}: {filteredType.percentage}%
-                                            <button onClick={deleteAssignmentType(filteredType.name, filteredType.classId)} id="delete-type">X</button>
+                                            <button onClick={() => deleteAssignmentType(filteredType.name, filteredType.classId)} id="delete-type">X</button>
                                             </li>
                                     ))}
                                 </ul>
