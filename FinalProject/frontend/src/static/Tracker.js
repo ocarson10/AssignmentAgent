@@ -90,6 +90,10 @@ function Tracker() {
         setButtonPopup(false);
         setAssignmentModal(true);
     }
+    const handleDeleteAssignment = (event) => {
+        console.log(checkedItem);
+        api.deleteAssignmentById(checkedItem);
+    }
 
     const onSignOutClick = () => {
         api.logOut().then(() => {

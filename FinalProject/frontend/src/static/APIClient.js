@@ -51,6 +51,11 @@ function handleError(error) {
       .catch(handleError);
   
   };
+
+  const deleteAssignmentById = (id) => {
+    return HTTPClient.delete('${API_BASE}/assignments/${id}/delete');
+  }
+
   const getClasses = () => {
     return fetch(API_BASE + '/classes')
       .then(checkResponse)

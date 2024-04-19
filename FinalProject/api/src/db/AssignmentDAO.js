@@ -25,10 +25,17 @@ function createAssignment(assignment){
         return getAssignmentById(results.insertId);
       });
 }
+function deleteAssignment(assignmentId){
+    return db.querty('DELETE FROM assignment WhERE asm_id=?', [assignmentId]).then(({results}) => {
+        if(results)
+        return results.map(assignment => new Assignment(assignment));
+    })
+}
 
 module.exports = {
     getAssignments: getAssignments,
     getAssignmentById: getAssignmentById,
+    deleteAssignment: deleteAssignment,
     getAssignmentByClass: getAssignmentByClass,
     createAssignment: createAssignment
 };

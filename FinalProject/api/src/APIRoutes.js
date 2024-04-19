@@ -38,6 +38,20 @@ router.get('/assignments/:assignmentId', TokenMiddleware,(req, res) =>{
     })
 });
 
+//delete specific assignment
+router.delete('/assignments/:assignmentId/delete', TokenMiddleware,(req, res) => {
+    const assignmentId = req.params.assignmentId;
+    AssignmentDAO.deleteAssignment(assignmentId).then(assignment => {
+        if(assignment){
+            res.json(assignment);
+        } else {
+            res.status(404).json({error:'Assignment not found'});
+        }
+    })
+    .catch(err => {
+        res.status(500).json({error: err});
+    })
+});
 
 //get all classes
 router.get('/classes', TokenMiddleware,(req,res) => {
