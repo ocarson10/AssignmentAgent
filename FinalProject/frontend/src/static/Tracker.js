@@ -90,10 +90,7 @@ function Tracker() {
         setButtonPopup(false);
         setAssignmentModal(true);
     }
-    const handleDeleteAssignment = (event) => {
-        console.log(checkedItem);
-        api.deleteAssignmentById(checkedItem);
-    }
+
 
     const onSignOutClick = () => {
         api.logOut().then(() => {
@@ -162,6 +159,19 @@ function Tracker() {
         }
         const classesFilered = allAssignments.filter(assignment => getClassByCode(assignment.classId) === selected);
         return classesFilered;
+    }
+    const deleteAssignment = (event) => {
+        api.deleteAssignmentById(checkedItem).then(assignment => {
+            document.location = "./tracker";
+        }). catch((err) => {
+            console.log("ERROR");
+
+          if(err.message === 'Offline' || err.status === 503) {
+            document.location = "./offline";
+          } else {
+            console.log(err);
+          }
+        });
     }
 
     if (!user) {
@@ -269,7 +279,7 @@ function Tracker() {
                             <>
                                 <button onClick={handlePopupAssignment}>Edit Assignment</button>
                                 {/* Add functionality to delete assignment from db */}
-                                <button>Delete Assignment</button>
+                                <button onClick={deleteAssignment}>Delete Assignment</button>
                             </>
                         
                             

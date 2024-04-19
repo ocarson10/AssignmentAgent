@@ -26,9 +26,9 @@ function createAssignment(assignment){
       });
 }
 function deleteAssignment(assignmentId){
-    return db.querty('DELETE FROM assignment WhERE asm_id=?', [assignmentId]).then(({results}) => {
+    return db.query('DELETE FROM assignment WHERE asm_id=?', [assignmentId]).then(({results}) => {
         if(results)
-        return results.map(assignment => new Assignment(assignment));
+        return results;
     })
 }
 

@@ -53,7 +53,7 @@ function handleError(error) {
   };
 
   const deleteAssignmentById = (id) => {
-    return HTTPClient.delete('${API_BASE}/assignments/${id}/delete');
+    return HTTPClient.delete(`${API_BASE}/assignments/${id}/delete`);
   }
 
   const getClasses = () => {
@@ -193,5 +193,6 @@ function handleError(error) {
     createUser,
     addAssignment,
     addClass,
-    addAssignmentType
+    addAssignmentType,
+    deleteAssignmentById
   };
