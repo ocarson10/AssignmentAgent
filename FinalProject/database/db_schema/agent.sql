@@ -27,9 +27,7 @@ CREATE TABLE IF NOT EXISTS `assignment_type` (
   `type_name` varchar(100) NOT NULL,
   `clss_id` int(11) unsigned NOT NULL,
   `percentage`  int(10) unsigned NOT NULL,
-  PRIMARY KEY (`type_name`, `clss_id`),
-  INDEX `clss_id_index` (`clss_id`), 
-  FOREIGN KEY (`clss_id`) REFERENCES `class`(`clss_id`)
+  PRIMARY KEY (`type_name`, `clss_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DELETE FROM `assignment_type`;
@@ -50,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `assignment` (
   `usr_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`asm_id`),
   FOREIGN KEY (`clss_id`) REFERENCES `class`(`clss_id`),
-  FOREIGN KEY (`asm_type`) REFERENCES `assignment_type`(`type_name`),
   FOREIGN KEY (`usr_id`) REFERENCES `user`(`usr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
