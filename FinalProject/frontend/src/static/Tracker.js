@@ -90,7 +90,10 @@ function Tracker() {
         setButtonPopup(false);
         setAssignmentModal(true);
     }
-
+    const handleDeleteAssignment = (event) => {
+        console.log(checkedItem);
+        api.deleteAssignmentById(checkedItem);
+    }
 
     const onSignOutClick = () => {
         api.logOut().then(() => {
@@ -285,7 +288,7 @@ function Tracker() {
                             
                         )}
                         <AddAssignment trigger={assignmentModal} setTrigger={setAssignmentModal}>
-                            <AssignmentForm allClasses={allClasses} isEdit={isEdit} user={user}  />
+                            <AssignmentForm allClasses={allClasses} isEdit={isEdit} checkedItem={checkedItem} user={user}  />
                         </AddAssignment>
 
                 </div>    

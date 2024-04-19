@@ -29,7 +29,6 @@ function AssignmentForm(props) {
         fetchAssignmentTypes();
     }, []);
 
-   
 
     const handleSelectChange = (event) => {
         setSelected(event.target.value);
@@ -58,13 +57,25 @@ function AssignmentForm(props) {
               }
         })
     }
+
+    const handleEdit = async () => {
+        console.log(props.checkedItem);
+        const asm = await api.getAssignmentById(props.checkedItem);
+        setName(asm.name);
+        setType(asm.type);
+        setDate(asm.date);
+        setGrade(asm.grade);
+        setStatus(asm.status);
+    }
    
     return (
 
         <div className="assignmentForm">
             {props.isEdit && (
-                <h3>Edit Assignment</h3>
+                <h3 onClick={handleEdit}>Edit Assignment</h3>
                 // TODO: For edit Set field variables to assignment being edited so form is populated upon load 
+                
+
             )}
              {!props.isEdit && (
                 <h3>Add Assignment</h3>
