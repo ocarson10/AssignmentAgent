@@ -3,6 +3,7 @@ import Login from './static/login';
 import Tracker from './static/Tracker';
 import ClassList from './static/ClassList';
 import Offline from './static/Offline';
+import Calendar from './static/Calendar';
 // import { useEffect, useState } from 'react';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/tracker" element={<Tracker />} />
           <Route path="/classlist" element={<ClassList/>} />
+          <Route path="/calendar" element={<Calendar/>}/>
           <Route path="/offline" element={<Offline/>} />
         </Routes>
       </BrowserRouter>

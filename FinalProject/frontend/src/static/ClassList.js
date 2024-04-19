@@ -112,7 +112,7 @@ function ClassList() {
                 <h2>Class List</h2>
                 <h4>Total Classes: {allClasses.length}</h4>
                 <div id="classlist-btns">
-                    <button value="View Calendar"><FontAwesomeIcon icon={faCalendar} /></button>
+                <a href="/calendar"><button value="View Calendar"><FontAwesomeIcon icon={faCalendar} /></button></a>
                     <a href="/tracker"><button id="Tracker" href="/tracker">Assignment Tracker</button></a>
                     {!checkedItem && (
                         <button onClick={handlePopupClass}>Add Class</button>

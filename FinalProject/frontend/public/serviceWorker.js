@@ -17,6 +17,7 @@ function log(...data) {
           '/offline',
           '/tracker',
           '/classlist',
+          '/calendar',
           // //CSS
           // 'static/css/App.css',
           // 'static/css/ClassList.css',
