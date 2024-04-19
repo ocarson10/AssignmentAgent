@@ -39,31 +39,21 @@ function Tracker() {
         fetchCurrentUser();
       }, []);
 
+
       React.useEffect(() => {
         if (user) {
-        const fetchAssignments = async () => {
-            let assignments = await api.getAssignments();
-            assignments = assignments.filter(assignment => assignment.userId === user.id);
-            setAllAssignments(assignments);
-        };
-        fetchAssignments();
-    }
-    }, [user]);
-    React.useEffect(() => {
-        if (user) {
-        const fetchClasses = async () => {
-            let classes = await api.getClasses();
-            classes = classes.filter(singleClass => singleClass.userId === user.id);
-            setAllClasses(classes);
-        };
-        fetchClasses();
-    }
-    }, [user]);
-
-    React.useEffect(() => {
-        if (user) {
-        const fetchAssignmentTypes = async () => {
+        const fetchUserData = async () => {
+          
             try{
+
+                let assignments = await api.getAssignments();
+                assignments = assignments.filter(assignment => assignment.userId === user.id);
+                setAllAssignments(assignments);
+                    
+                let classes = await api.getClasses();
+                classes = classes.filter(singleClass => singleClass.userId === user.id);
+                setAllClasses(classes);
+
                 const types = await api.getAssignmentTypes();
                 setAllAssignmentTypes(types);
             } catch(err){
@@ -73,11 +63,11 @@ function Tracker() {
                     console.log(err);
                   }
             }
-            
         };
-        fetchAssignmentTypes();
+        fetchUserData();
     }
     }, [user]);
+
     const handleCheckboxChange = (id) => {
         
         if(id === checkedItem){

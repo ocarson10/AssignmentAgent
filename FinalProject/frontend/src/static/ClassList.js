@@ -65,30 +65,26 @@ function ClassList() {
     React.useEffect(() => {
         if (user) {
             const fetchClasses = async () => {
-                let classes = await api.getClasses();
-                classes = classes.filter(singleClass => singleClass.userId === user.id);
-                setAllClasses(classes);
+              
+                try{
+                    let classes = await api.getClasses();
+                    classes = classes.filter(singleClass => singleClass.userId === user.id);
+                    setAllClasses(classes);
+
+                    const types = await api.getAssignmentTypes();
+                    setAllAssignmentTypes(types);
+                } catch(err){
+                    if(err.message === 'Offline' || err.status === 503) {
+                        document.location = "./offline";
+                      } else {
+                        console.log(err);
+                      }
+                }
             };
             fetchClasses();
         }
     }, [user]);
 
-    React.useEffect(() => {
-        const fetchAssignmentTypes = async () => {
-            try{
-                const types = await api.getAssignmentTypes();
-                setAllAssignmentTypes(types);
-            } catch(err){
-                if(err.message === 'Offline' || err.status === 503) {
-                    document.location = "./offline";
-                  } else {
-                    console.log(err);
-                  }
-            }
-            
-        };
-        fetchAssignmentTypes();
-    }, []);
 
     if (!user) {
         return null;
@@ -130,21 +126,21 @@ function ClassList() {
                 <div id="card-container">
                     {/* Reference: https://react-bootstrap.netlify.app/docs/components/cards/ */}
                     {allClasses.map(singleClass =>(
-                        <Card>
+                        <Card key={singleClass.id}>
                             <Card.Header>{singleClass.name}</Card.Header>
                             <Card.Body>
                                 <Card.Title>Credit Hours: {singleClass.creditHours}</Card.Title>
-                                <Card.Text>
                                 <ul>
                                     {allAssignmentTypes
-                                        .filter((type) => type.className === singleClass.name)
+                                        .filter((type) => type.classId === singleClass.id)
                                         .map((filteredType, index) => (
                                             <li key={index}>
                                             {filteredType.name}: {filteredType.percentage}%
+                                            <button id="delete-type">X</button>
                                             </li>
                                     ))}
                                 </ul>
-                                </Card.Text>
+                               
                             </Card.Body>
                             {/* TODO: Create functionality for these buttons */}
                             <div id="card-btns">

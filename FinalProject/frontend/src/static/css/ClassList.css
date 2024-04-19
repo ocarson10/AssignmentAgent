@@ -36,6 +36,11 @@
 #classlist-page {
     max-width: 100%;
 }
+#delete-type {
+    width: 25px;
+    height: 25px;
+    font-size: medium;
+}
 /* Updates sizing of elements for smaller screens */
 @media all and (max-width: 575px){
     .card {
