@@ -177,7 +177,7 @@ router.post('/assignmentTypes', (req, res) => {
 
 router.delete('/assignmentTypes/:assignmentTypeName/:classId/delete', TokenMiddleware,(req, res) => {
     const classId = req.params.classId;
-    const typeName = req.params.typeName;
+    const typeName = req.params.assignmentTypeName;
     AssignmentTypeDAO.deleteAssignmentType(typeName, classId).then(assignmentType => {
         if(assignmentType){
             res.json(assignmentType);
