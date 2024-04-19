@@ -29,9 +29,21 @@ function createAssignmentType(type){
       });
 }
 
+function deleteAssignmentType(typeName, classId) {
+    return db.query('DELETE FROM assignment_type WHERE type_name=? AND clss_id=?', [typeName, classId])
+        .then(({results}) => {
+            return results;
+        })
+        .catch(err => {
+            console.error("Error deleting assignment type:", err);
+            throw err;
+        });
+}
+
 module.exports = {
     getAssignmentTypes: getAssignmentTypes,
     getAssignmentTypeByValues: getAssignmentTypeByValues,
     getAssignmentTypeByClass: getAssignmentTypeByClass,
-    createAssignmentType: createAssignmentType
+    createAssignmentType: createAssignmentType,
+    deleteAssignmentType: deleteAssignmentType
 };

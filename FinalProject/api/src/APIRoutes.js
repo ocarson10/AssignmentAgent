@@ -175,4 +175,19 @@ router.post('/assignmentTypes', (req, res) => {
     })
 })
 
+router.delete('/assignmentTypes/:assignmentTypeName/:classId/delete', TokenMiddleware,(req, res) => {
+    const classId = req.params.classId;
+    const typeName = req.params.typeName;
+    AssignmentTypeDAO.deleteAssignmentType(typeName, classId).then(assignmentType => {
+        if(assignmentType){
+            res.json(assignmentType);
+        } else {
+            res.status(404).json({error:'Assignment Type not found'});
+        }
+    })
+    .catch(err => {
+        res.status(500).json({error: err});
+    })
+});
+
 module.exports = router;

@@ -62,6 +62,21 @@ function ClassList() {
         });
     }
 
+    function deleteAssignmentType(typeName, classId) {
+        api.deleteAssignmentType(typeName, classId).then(assignmentType =>{
+            console.log("delete");
+            document.location = "./classlist"
+        }).catch((err) => {
+            console.log("ERROR");
+
+            if(err.message === 'Offline' || err.status === 503) {
+                document.location = "./offline";
+            } else {
+                console.log(err);
+            }
+        })
+    }
+
     React.useEffect(() => {
         if (user) {
             const fetchClasses = async () => {
@@ -136,7 +151,7 @@ function ClassList() {
                                         .map((filteredType, index) => (
                                             <li key={index}>
                                             {filteredType.name}: {filteredType.percentage}%
-                                            <button id="delete-type">X</button>
+                                            <button onClick={deleteAssignmentType(filteredType.name, filteredType.classId)} id="delete-type">X</button>
                                             </li>
                                     ))}
                                 </ul>
