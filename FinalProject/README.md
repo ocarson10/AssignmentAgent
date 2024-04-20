@@ -18,11 +18,11 @@
 
 | Pages                   | Status | Wireframe |
 |-------------------------|--------|-----------|
-| Login                   | 95%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20Login.jpg) |
-| Assignment Tracker      | 80%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20All%20Classes.jpg) |
-| GPA Popup               | 70%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20GPA.jpg)|
-| Class List              | 80%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20Add%20Classes.png) |
-| Calendar (Stretch Goal) | 0%     | [wireframe](../Proposal/Wireframes/Desktop%20-%20Calendar.jpg)|
+| Login                   | 100%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20Login.jpg) |
+| Assignment Tracker      | 100%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20All%20Classes.jpg) |
+| Grades Popup            | 100%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20GPA.jpg)|
+| Class List              | 100%    | [wireframe](../Proposal/Wireframes/Desktop%20-%20Add%20Classes.png) |
+| Calendar (Stretch Goal) | 100%     | [wireframe](../Proposal/Wireframes/Desktop%20-%20Calendar.jpg)|
 
 | Method | Route                             | Description                                    |
 |--------|-----------------------------------|------------------------------------------------|
@@ -42,31 +42,34 @@
 | GET    | /classes/:classId/assignment-types| Retrieves assignment types by class ID         |
 | POST   | /classes                          | Creates a new class                            |
 | GET    | /assignments/class/:classCode     | Retrieves all assignments for a specific class |
+| DELETE    | /assignments/:assignmentId/delete     | Deletes assignment with the given id |
+| DELETE    | /assignmentTypes/:assignmentTypeName/:classId/delete    | Deletes assignment type with the given assignment type name and class id |
+| DELETE    | /classes/:id     | Deletes class with the given id |
+| PUT    | /assignments   |Edits the assignment selected. Assignment id is passed in through req.body |
 
 ### Team Member Contributions
 
 #### [Olivia Carson]
+- Offline functionality
+- Making PWA installable
+- calculating final grade
+- Calendar Page
+- edit and deleting assignments
 
-- Database connection
-- Added Routes and DAOs for User, Assignment, Class, and Assignment Type
-- Updated Frontend API to show database information
-- Implemented User Sign Up form
 
 #### [Austin Heyward]
 
-- User Authentication
-- Refactored database to include user IDs and get data based on user ID
-- Having the frontend show user specific information rather than all classes/assignments
-- Updated Tracker.js to not load unless a user has been loaded in (fixed some problems with page population)
-- README
+- 
 
-#### [Mico Guevarra]
+### [Mico Guevarra]
 
-- Wrote new API routes for adding a class and adding assignment
-- Worked on forms for adding a class and adding an assignment
 
 #### Milestone Effort Contribution
 
-| Olivia Carson | Austin Heyward| Mico Guevarra |
-| ------------- | ------------- | ------------- |
-| 33%           | 33%           | 33%           |
+Milestone   | Olivia Carson| Austin Heyward | Mico Guevarra
+----------- | ------------- | ------------- | --------------
+Milestone 1 | 50%            | 25%            | 25%
+Milestone 2 | 33.3%            | 33.3%            | 33.3%
+Final       | X%            | Y%            | Z%
+----------- | ------------- | ------------- | --------------
+TOTAL:      | (A+M+X)%      | (B+N+Y)%      | (C+O+Z)%
