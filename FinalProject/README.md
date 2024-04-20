@@ -1,8 +1,15 @@
 # Assignment Agent
 
 ### What works (description of your features) and what doesn't work (any known issues)
+Our app opens up to a login page. No matter what page you try to navigate to, if you’re not logged in, it will always redirect the user to the login page. Here, you can login if you have an account, or sign up if you don’t. After logging in and finishing your session, you can also use the button at the top of the app to sign back out.
+
+On our Class List page, you have the ability to add classes by entering their title and how many credit hours they are. After creating a class, it will be displayed in a card on the page. Then, you can create an assignment type for the class, which will display in the card, as well as show what percent of your final grade in the class it is. You can also delete classes (as long as there’s no associated assignments, which we’ll get into when discussing the Tracker page), and you can delete assignment types within classes.
+
+On our Tracker page, a table of all the assignments the user has created are displayed, along with what class the assignment’s for, the name of the assignment, the type of assignment (e.g. homework), the due date, the grade you received (if completed), and its current status (not started, in progress, or completed). You can use the “Add Assignment” button to create a new assignment for the table. If you’ve made a mistake, you can select the checkbox to the left of each table entry and select either Edit or Delete Assignment. If your table is too cluttered to keep up with all of your assignments, you can filter the table by classes, so you’re only shown assignments for that specific class. There’s also a Grades button at the top right where you can see your calculated grades for all of your classes based on your inputted grades for your assignments. Your grade number only displays if your assignment type percentages for the class add up to 100. In order to clearly see when all of your assignments are due, you can click the Calendar icon next to Grades to be shown a calendar that displays all of your assignments on the day they’re due.
 
 ### A brief description of your authentication and authorization processes. What techniques are you using? What data is being stored where and how? How are you making sure users only access what they are allowed to?
+We’re using Token-based Authentication using JSON Web Tokens. Once a user logs in, our middleware generates a token using an API Secret Key (which is stored in .env and never pushed to version control) in order to authenticate the user and authorize them to view the data relevant to their account. They are only able to see the data that they themselves have inputted, including classes, assignments, and grades. All of our user data is being stored in our SQL database, and it includes a user ID, their first name, last name, username, a hashed password, and a unique salt. When a new user is created, their password is hashed with a randomly generated salt. Users are only able to access their own information because all of the pages display information based on the currently signed in user. There’s no way for the web pages to display any other user’s data. Also, if you’re not logged in, all web pages automatically redirect you to the login page.
+
 ### A list of all the pages in your app, how to navigate them, and the offline functionality they provide, if any
 | Pages                   | Navigation | Offline Functionality |
 |-------------------------|------------|-----------------------|
@@ -13,7 +20,10 @@
 
 ### A description of your caching strategy and why you chose it
   When it comes to caching for offline functionality, we used the CacheStorage interface within our service worker to cache all of our pages and images within our application. Since we have a React application, we were able to cache the page routes (/ , /tracker, / classlist, /calendar, /offline) and when the user is online, the data from those pages will populate once the user logs in. If a user has gone offline and tries to navigate to a page, the proper data will be available to view for the current user. The user will not be able to preform any actions such as adding, edititing, or deleting assignments, classes and assignment types until the user is back online. If they try to preform these actions offline, the user will be sent to an offline page. This strategy allows the user to still view all of their assignments, classes, and grades but waits until a user in back online to preform any actions on them.
+
 ### An ER diagram of your final database schema
+![ER Diagram](https://github.ncsu.edu/engr-csc342/csc342-2024Spring-GroupN/blob/main/Images/er-diagram.png)
+
 ## Group N: Milestone 2
 
 | Pages                   | Status | Wireframe |
@@ -55,11 +65,16 @@
 - calculating final grade
 - Calendar Page
 - edit and deleting assignments (bug fixes)
+- Collaborated on README
 
 
 #### [Austin Heyward]
-
-- 
+- Adding Assignment Types
+- Deleting Assignment Types
+- Some updates to content
+- Delete Class
+- Bug fixes on all of the above
+- Collaborated on README
 
 ### [Mico Guevarra]
 - edit and deleting assignments
