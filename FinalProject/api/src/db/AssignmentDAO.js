@@ -32,10 +32,17 @@ function deleteAssignment(assignmentId){
     })
 }
 
+function updateAssignment(assignment){
+    return db.query('UPDATE assignment SET clss_id=?, asm_name=?, asm_type=?, asm_due=?, asm_grade=?, asm_status=? WHERE asm_id=?', [assignment.classId, assignment.name, assignment.type, assignment.dueDate, assignment.grade, assignment.status, assignment.asmId]).then(({results}) => {
+        return getAssignmentById(assignment.asmId);
+      });
+}
+
 module.exports = {
     getAssignments: getAssignments,
     getAssignmentById: getAssignmentById,
     deleteAssignment: deleteAssignment,
     getAssignmentByClass: getAssignmentByClass,
-    createAssignment: createAssignment
+    createAssignment: createAssignment,
+    updateAssignment: updateAssignment
 };

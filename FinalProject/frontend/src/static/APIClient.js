@@ -181,6 +181,19 @@ function handleError(error) {
     return HTTPClient.delete(`${API_BASE}/assignmentTypes/${typeName}/${classId}/delete`);
   }
 
+  const updateAssignment = (asmId, classId, name, type, dueDate, grade, status) => {
+    const data = {
+      asmId: asmId,
+      classId: classId,
+      name: name,
+      type: type,
+      dueDate: dueDate,
+      grade: grade,
+      status: status
+    }
+    return HTTPClient.put(`${API_BASE}/assignments`, data);
+  };
+
   export default {
     getCurrentUser,
     getAssignments,
@@ -199,5 +212,6 @@ function handleError(error) {
     addClass,
     addAssignmentType,
     deleteAssignmentById,
-    deleteAssignmentType
+    deleteAssignmentType,
+    updateAssignment
   };

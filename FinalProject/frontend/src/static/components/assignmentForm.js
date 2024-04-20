@@ -60,19 +60,32 @@ function AssignmentForm(props) {
 
     const handleEdit = async () => {
         console.log(props.checkedItem);
-        const asm = await api.getAssignmentById(props.checkedItem);
-        setName(asm.name);
-        setType(asm.type);
-        setDate(asm.date);
-        setGrade(asm.grade);
-        setStatus(asm.status);
+         
+        // setName(asm.name);
+        // setType(asm.type);
+        // setDate(asm.date);
+        // setGrade(asm.grade);
+        // setStatus(asm.status);
+           
+           api.updateAssignment(props.checkedItem, selected, name, type, date, grade, status).then(assignment => {
+            document.location = "./tracker";
+            console.log("PASS");
+           }).catch((err) => {
+            console.log("ERROR addAssignment", err);
+
+            if(err.message === 'Offline' || err.status === 503) {
+                document.location = "./offline";
+              } else {
+                console.log(err);
+              }
+        })
     }
    
     return (
 
         <div className="assignmentForm">
             {props.isEdit && (
-                <h3 onClick={handleEdit}>Edit Assignment</h3>
+                <h3>Edit Assignment</h3>
                 // TODO: For edit Set field variables to assignment being edited so form is populated upon load 
                 
 
@@ -89,7 +102,7 @@ function AssignmentForm(props) {
                         {props.allClasses.map(singleClass => (
                             <option key={singleClass.id} value={singleClass.id}>{singleClass.name}</option>
                         ))}
-                </select>
+                  </select>
                 </label>
                 <label>
                     Name 
@@ -136,10 +149,21 @@ function AssignmentForm(props) {
                     </select>
                 </label>
                 <br />
+                {props.isEdit && (
+                
+                    <button className="form-button" id="submit"  onClick={handleEdit}>
+                       Submit Edit
+                     </button>
+                
+                  )}
+                 {!props.isEdit && (
+                         <button className="form-button" id="submit" onClick={handleSubmit}>
+                         Submit
+                     </button>
+                 )}
                
-                <button className="form-button" id="submit" onClick={handleSubmit}>
-                    Submit
-                </button>
+
+              
             </form>
         </div>
     );
