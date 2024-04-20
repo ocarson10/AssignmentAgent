@@ -152,6 +152,13 @@ router.post('/assignments', (req, res) => {
     });
 });
 
+router.put('/assignments', (req, res) => {
+    let assignment = req.body;
+    AssignmentDAO.updateAssignment(assignment).then(newAssignment => {
+        res.json(newAssignment);
+    });
+});
+
 router.post('/classes', (req, res) => {
     let clss = req.body;
     ClassDAO.createClass(clss).then(newClass => {
