@@ -77,6 +77,20 @@ function ClassList() {
         })
     }
 
+    function deleteClass(classId) {
+        api.deleteClass(classId).then(classItem =>{
+            document.location = "./classlist"
+        }).catch((err) => {
+            console.log("ERROR");
+
+            if(err.message === 'Offline' || err.status === 503) {
+                document.location = "./offline";
+            } else {
+                console.log(err);
+            }
+        })
+    }
+
     React.useEffect(() => {
         if (user) {
             const fetchClasses = async () => {
@@ -159,8 +173,7 @@ function ClassList() {
                             </Card.Body>
                             {/* TODO: Create functionality for these buttons */}
                             <div id="card-btns">
-                                <button value="Edit"><FontAwesomeIcon icon={faPenToSquare} /></button>
-                                <button value="Delete"><FontAwesomeIcon icon={faTrashCan} /></button>
+                                <button onClick={() => deleteClass(singleClass.id)} value="Delete"><FontAwesomeIcon icon={faTrashCan} /></button>
                             </div>
                         </Card>
                     ))}

@@ -190,4 +190,18 @@ router.delete('/assignmentTypes/:assignmentTypeName/:classId/delete', TokenMiddl
     })
 });
 
+router.delete('classes/:id/delete', TokenMiddleware, (req, res) => {
+    const id = req.params.id;
+    ClassDAO.deleteClass(id).then(classItem => {
+        if(classItem){
+            res.json(classItem);
+        } else {
+            res.status(404).json({error:'Class not found'});
+        }
+    })
+    .catch(err => {
+        res.status(500).json({error: err});
+    })
+});
+
 module.exports = router;

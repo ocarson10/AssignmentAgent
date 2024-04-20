@@ -25,9 +25,21 @@ function createClass(classData){
       });
 }
 
+function deleteClass(id) {
+    return db.query('DELETE FROM class WHERE clss_id=?', [id])
+        .then(({results}) => {
+            return results;
+        })
+        .catch(err => {
+            console.error("Error deleting class:", err);
+            throw err;
+        });
+}
+
 module.exports = {
     getClasses: getClasses,
     getClassByCode: getClassByCode,
     createClass: createClass,
-    getClassById: getClassById
+    getClassById: getClassById,
+    deleteClass: deleteClass
 };
