@@ -197,7 +197,7 @@ router.delete('/assignmentTypes/:assignmentTypeName/:classId/delete', TokenMiddl
     })
 });
 
-router.delete('classes/:id/delete', TokenMiddleware, (req, res) => {
+router.delete('/classes/:id', TokenMiddleware, (req, res) => {
     const id = req.params.id;
     ClassDAO.deleteClass(id).then(classItem => {
         if(classItem){
