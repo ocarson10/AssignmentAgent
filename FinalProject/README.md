@@ -54,7 +54,7 @@
 - Making PWA installable
 - calculating final grade
 - Calendar Page
-- edit and deleting assignments
+- edit and deleting assignments (bug fixes)
 
 
 #### [Austin Heyward]
@@ -62,7 +62,7 @@
 - 
 
 ### [Mico Guevarra]
-
+- edit and deleting assignments
 
 #### Milestone Effort Contribution
 
@@ -70,6 +70,6 @@ Milestone   | Olivia Carson| Austin Heyward | Mico Guevarra
 ----------- | ------------- | ------------- | --------------
 Milestone 1 | 50%            | 25%            | 25%
 Milestone 2 | 33.3%            | 33.3%            | 33.3%
-Final       | X%            | Y%            | Z%
+Final       | 50%            | 45%            | 5%
 ----------- | ------------- | ------------- | --------------
-TOTAL:      | (A+M+X)%      | (B+N+Y)%      | (C+O+Z)%
+TOTAL:      | 133.3%      | 103.3%      | 63.3%
