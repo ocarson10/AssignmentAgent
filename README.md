@@ -1,4 +1,4 @@
-# CSC 342 Group N Repo
+# CSC 342 Group N Repository
 
 Members: 
 - Olivia Carson (orcarson)
